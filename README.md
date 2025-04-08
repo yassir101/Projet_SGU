@@ -11,9 +11,11 @@ La branche `main` est réservée à la version stable finale du projet.
 1. Clonage du projet
 --------------------
 
+Fork le projet sur Github (fork main et dev)
+
 Ouvrez un terminal et entrez :
 
-    git clone https://github.com/yassir101/Projet_SGU.git
+    git clone https://github.com/[votre nom user]/Projet_SGU.git
     cd Projet_SGU
 
 2. Travailler sur la branche "dev"
