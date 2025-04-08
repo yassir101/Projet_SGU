@@ -1,0 +1,31 @@
+# Compiled object files
+*.o
+*.obj
+
+# Compiled binary files
+*.exe
+*.out
+*.app
+*.bin
+
+# Build directory
+build/
+
+# Backup files
+*~
+*.swp
+*.bak
+
+# Logs and dumps
+*.log
+*.tmp
+*.core
+
+# Doxygen output
+docs/html/
+docs/latex/
+docs/*.tag
+
+# Mac/Linux system files
+.DS_Store
+Thumbs.db
