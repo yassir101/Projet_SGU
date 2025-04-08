@@ -4,8 +4,8 @@ Projet SGU — Système de Gestion des Urgences
 Collaboration sur la branche "dev"
 ----------------------------------
 
-Ce projet est développé en équipe dans le cadre du module de CPP. 
-Toutes les contributions doivent être faites sur la branche `dev`. 
+Ce projet est développé en équipe dans le cadre du module de CPP.  
+Toutes les contributions doivent être faites sur la branche `dev`.  
 La branche `main` est réservée à la version stable finale du projet.
 
 1. Clonage du projet
@@ -32,7 +32,7 @@ Avant toute modification, assurez-vous d'être sur la bonne branche :
 Vous pouvez créer un nouveau fichier ou modifier ceux déjà présents.
 
     touch src/mon_module.cpp
-    echo "// début du code" > src/mon_module.cpp     #pas forcément nécessaire
+    echo "// début du code" > src/mon_module.cpp     # pas forcément nécessaire
 
 4. Ajouter et valider les changements
 -------------------------------------
@@ -51,7 +51,47 @@ Vous pouvez créer un nouveau fichier ou modifier ceux déjà présents.
 Avant chaque nouvelle session de travail, pensez à récupérer les dernières modifications :
 
     git checkout dev
+    git pull origin dev          #Pour actualiser votre projet par rapport au github du groupe
+
+Utilisation avec Visual Studio Code (VScode / VSCodium)
+--------------------------------------------------------
+
+Nous recommandons l’usage de Visual Studio Code ou VSCodium pour le développement.
+
+### Ouvrir le projet
+
+Dans un terminal :
+
+    code Projet_SGU/
+    # ou si vous êtes déjà dans le dossier
+    code .
+
+Si la commande `code` ne fonctionne pas :
+- Ouvrez VScode
+- `Ctrl+Shift+P` → `Shell Command: Install 'code' command in PATH`
+
+### Créer / modifier un fichier
+
+- Dans l'explorateur (barre de gauche), clic droit sur `src/` → *Nouveau fichier*.
+- Donnez un nom comme `mon_module.cpp`, puis commencez à coder.
+- Sauvegardez avec `Ctrl+S`.
+
+### Terminal intégré
+
+Utilisez le terminal intégré de VScode (`Ctrl+``) pour exécuter toutes les commandes Git :
+
+    git checkout dev
     git pull origin dev
+    git add .
+    git commit -m "Ajout/modif"
+    git push origin dev
+
+### Extensions recommandées
+
+- **C/C++** (Microsoft)
+- **GitLens**
+- **Doxygen Documentation Generator**
+- **CMake Tools** (si vous utilisez CMake)
 
 Règles importantes
 ------------------
@@ -77,10 +117,9 @@ Organisation du dépôt
 Auteurs
 -------
 
-- Ankoudy Yassir
-- Cheikh Tourad Wedou
-- Duquesnoy Samuel
-- Guissou Dakisaglogo
+- Ankoudy Yassir  
+- Cheikh Tourad Wedou  
+- Duquesnoy Samuel  
+- Guissou Dakisaglogo  
 
 Bon code à tous 🚀
-
