@@ -1,125 +1,167 @@
-Projet SGU — Système de Gestion des Urgences
-============================================
+# Projet SGU — Système de Gestion des Urgences
+_________________________________________________________________________
 
-Collaboration sur la branche "dev"
-----------------------------------
+## Collaboration sur la branche "dev"
 
 Ce projet est développé en équipe dans le cadre du module de CPP.  
 Toutes les contributions doivent être faites sur la branche `dev`.  
 La branche `main` est réservée à la version stable finale du projet.
 
-1. Clonage du projet
---------------------
+---
 
-Fork le projet sur Github (fork main et dev)
+## 1. Clonage du projet
+
+Fork le projet sur Github (fork `main` et `dev`)
 
 Ouvrez un terminal et entrez :
 
-    git clone https://github.com/[votre nom user]/Projet_SGU.git
-    cd Projet_SGU
+```bash
+git clone https://github.com/[votre-nom-utilisateur]/Projet_SGU.git
+cd Projet_SGU
+```
 
-2. Travailler sur la branche "dev"
-----------------------------------
+---
 
-Avant toute modification, assurez-vous d'être sur la bonne branche :
+## 2. Travailler sur la branche "dev"
 
-    git checkout dev
-    git pull origin dev
+Avant toute modification, assurez-vous d’être sur la bonne branche :
 
-3. Ajouter ou modifier du code
-------------------------------
+```bash
+git checkout dev
+git pull origin dev
+```
 
-Vous pouvez créer un nouveau fichier ou modifier ceux déjà présents.
+---
 
-    touch src/mon_module.cpp
-    echo "// début du code" > src/mon_module.cpp     # pas forcément nécessaire
+## 3. Ajouter ou modifier du code
 
-4. Ajouter et valider les changements
--------------------------------------
+Créez un nouveau fichier ou modifiez ceux déjà présents :
 
-    git add .
-    git commit -m "Ajout du module mon_module"
+```bash
+touch src/mon_module.cpp
+echo "// début du code" > src/mon_module.cpp
+```
 
-5. Pousser sur la branche "dev"
--------------------------------
+---
 
-    git push origin dev
+## 4. Ajouter et valider les changements
 
-6. Mettre à jour votre dépôt local
-----------------------------------
+```bash
+git add .
+git commit -m "Ajout du module mon_module"
+```
 
-Avant chaque nouvelle session de travail, pensez à récupérer les dernières modifications :
+---
 
-    git checkout dev
-    git pull origin dev          #Pour actualiser votre projet par rapport au github du groupe
+## 5. Pousser sur la branche "dev"
 
-Utilisation avec Visual Studio Code (VScode / VSCodium)
---------------------------------------------------------
+```bash
+git push origin dev
+```
 
-Nous recommandons l’usage de Visual Studio Code ou VSCodium pour le développement.
+⚠️ Si une erreur `non-fast-forward` s’affiche :
 
-### Ouvrir le projet
+```bash
+git pull origin dev     # récupère les modifications distantes
+# Résolvez les conflits si nécessaire
+git push origin dev     # pousse vos changements après résolution
+```
+
+---
+
+## 6. Mettre à jour votre dépôt local
+
+Avant chaque session de travail, pensez à récupérer les dernières modifications :
+
+```bash
+git checkout dev
+git pull origin dev
+```
+
+---
+
+## Utilisation avec Visual Studio Code (VScode / VSCodium)
+
+### 📂 Ouvrir le projet
 
 Dans un terminal :
 
-    code Projet_SGU/
-    # ou si vous êtes déjà dans le dossier
-    code .
+```bash
+code Projet_SGU/
+# ou si vous êtes déjà dans le dossier
+code .
+```
+*Si c'est VSCodium utilisez codium au lieu de code*
 
-Si la commande `code` ne fonctionne pas :
-- Ouvrez VScode
-- `Ctrl+Shift+P` → `Shell Command: Install 'code' command in PATH`
+*Si la commande `code` ne fonctionne pas :*  
+`Ctrl+Shift+P` → `Install 'code' command in PATH`
 
-### Créer / modifier un fichier
+---
 
-- Dans l'explorateur (barre de gauche), clic droit sur `src/` → *Nouveau fichier*.
-- Donnez un nom comme `mon_module.cpp`, puis commencez à coder.
-- Sauvegardez avec `Ctrl+S`.
+### ✏️ Créer ou modifier un fichier
 
-### Terminal intégré
+- Dans l’explorateur (à gauche), clic droit sur `src/` → *Nouveau fichier*
+- Tapez `urgence.cpp`, par exemple
+- Éditez et sauvegardez avec `Ctrl+S`
 
-Utilisez le terminal intégré de VScode (`Ctrl+``) pour exécuter toutes les commandes Git :
+---
 
-    git checkout dev
-    git pull origin dev
-    git add .
-    git commit -m "Ajout/modif"
-    git push origin dev
+### 💻 Utiliser le terminal intégré
 
-### Extensions recommandées
+- `Ctrl + \`` pour l’ouvrir
+- Vous pouvez y taper :
 
-- **C/C++** (Microsoft)
-- **GitLens**
+```bash
+git checkout dev
+git pull origin dev
+git add .
+git commit -m "Ajout ou modification"
+git push origin dev
+```
+
+---
+
+### 🔌 Extensions utiles
+
+- **C/C++** — Microsoft
+- **GitLens** — Historique Git visuel
 - **Doxygen Documentation Generator**
-- **CMake Tools** (si vous utilisez CMake)
+- **CMake Tools** — Si vous utilisez CMake pour la compilation
 
-Règles importantes
-------------------
+---
 
-- Ne poussez **rien** directement sur la branche `main`.
-- Travaillez **exclusivement sur `dev`**.
-- Communiquez avec le groupe si vous faites de grosses modifications.
-- Utilisez des messages de commit clairs et précis.
+## ⚠️ Règles importantes
 
-Organisation du dépôt
----------------------
+- Ne poussez **jamais** directement sur la branche `main`
+- Travaillez **exclusivement** sur `dev`
+- Communiquez avec le groupe si vous faites de grosses modifications
+- Utilisez des **messages de commit clairs et descriptifs**
 
-    Projet_SGU/
-    ├── src/         -> code source principal
-    ├── include/     -> fichiers d’en-tête (.h)
-    ├── test/        -> tests unitaires
-    ├── docs/        -> documentation Doxygen
-    ├── data/        -> données éventuelles
-    ├── build/       -> répertoire de compilation
-    ├── README.md    -> ce fichier
-    └── .gitignore   -> fichiers ignorés par Git
+---
 
-Auteurs
--------
+## 🗂️ Organisation du dépôt
+
+```bash
+Projet_SGU/
+├── src/         -> code source principal
+├── include/     -> fichiers d’en-tête (.h)
+├── test/        -> tests unitaires
+├── docs/        -> documentation Doxygen
+├── data/        -> données éventuelles
+├── build/       -> répertoire de compilation
+├── README.md    -> ce fichier
+└── .gitignore   -> fichiers ignorés par Git
+```
+
+---
+
+## 👥 Auteurs
 
 - Ankoudy Yassir  
 - Cheikh Tourad Wedou  
 - Duquesnoy Samuel  
 - Guissou Dakisaglogo  
+
+---
 
 Bon code à tous 🚀
