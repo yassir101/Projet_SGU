@@ -1,48 +1,62 @@
-/**
- * @file Urgence.h
- * @brief Classe abstraite représentant une urgence générique.
- */
-
-#ifndef URGENCE_H
-#define URGENCE_H
+#ifndef URGENCE_HPP
+#define URGENCE_HPP
 
 #include <string>
 
 /**
- * @class Urgence
- * @brief Classe de base pour tous les types d’urgences (accident, incendie, médicale...).
+ * @brief Classe abstraite représentant une urgence dans le SGU.
+ *
+ * Cette classe sert de base pour toutes les urgences signalées, avec des informations
+ * communes comme la localisation, la gravité et le statut.
  */
 class Urgence {
 protected:
-    std::string id;                ///< Identifiant unique de l'urgence
-    std::string type;              ///< Type d'urgence (ex: Incendie, Médicale, Accident)
-    std::string localisation;      ///< Localisation géographique
-    int niveauGravite;             ///< Gravité de l'urgence (1 à 5)
-    std::string statut;            ///< Statut actuel de l'urgence
+    std::string localisation; /**< Localisation de l’urgence (adresse ou GPS) */
+    int niveauGravite;        /**< Niveau de gravité (1: mineur, 2: majeur, 3: critique) */
+    std::string statut;       /**< Statut actuel (en attente, en cours, terminée) */
 
 public:
-    Urgence(const std::string& id, const std::string& type, const std::string& localisation, int niveauGravite);
+    /**
+     * @brief Constructeur avec paramètres.
+     * @param loc Localisation de l’urgence.
+     * @param grav Niveau de gravité (1 à 3).
+     */
+    Urgence(const std::string& loc, int grav);
 
+    /**
+     * @brief Destructeur virtuel.
+     */
     virtual ~Urgence() = default;
 
     /**
-     * @brief Évalue la priorité de traitement de l'urgence.
-     * @return Un entier représentant la priorité.
+     * @brief Récupère la localisation.
+     * @return La localisation sous forme de chaîne.
      */
-    virtual int evaluerPriorite() const = 0;
+    std::string getLocalisation() const;
 
     /**
-     * @brief Met à jour le statut de l'urgence.
-     * @param nouveauStatut Le nouveau statut à appliquer.
+     * @brief Définit la localisation.
+     * @param loc Nouvelle localisation.
      */
-    void mettreAJourStatut(const std::string& nouveauStatut);
+    void setLocalisation(const std::string& loc);
 
-    // Getters
-    std::string getId() const;
-    std::string getType() const;
-    std::string getLocalisation() const;
+    /**
+     * @brief Récupère le niveau de gravité.
+     * @return Le niveau de gravité.
+     */
     int getNiveauGravite() const;
-    std::string getStatut() const;
+
+    /**
+     * @brief Définit le statut de l’urgence.
+     * @param st Nouveau statut.
+     */
+    void setStatut(const std::string& st);
+
+    /**
+     * @brief Méthode virtuelle pure pour décrire l’urgence.
+     * @return Une description textuelle spécifique au type d’urgence.
+     */
+    virtual std::string description() const = 0;
 };
 
-#endif // URGENCE_H
+#endif // URGENCE_HPP

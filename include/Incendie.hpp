@@ -1,39 +1,31 @@
-/**
- * @file Incendie.h
- * @brief Classe représentant une urgence de type incendie.
- */
+#ifndef INCENDIE_HPP
+#define INCENDIE_HPP
 
-#ifndef INCENDIE_H
-#define INCENDIE_H
-
-#include "Urgence.h"
+#include "Urgence.hpp"
 
 /**
- * @class Incendie
- * @brief Spécialisation de la classe Urgence pour un incendie.
+ * @brief Représente une urgence de type incendie dans le SGU.
  */
 class Incendie : public Urgence {
 private:
-    std::string typeFeu; ///< Type de feu (ex: domestique, industriel, forêt, etc.)
+    std::string typeFeu; /**< Type de feu (habitation, forêt, véhicule) */
+    double superficie;   /**< Superficie en m² */
 
 public:
     /**
-     * @brief Constructeur de l'objet Incendie
-     * @param id Identifiant de l'urgence
-     * @param localisation Localisation du feu
-     * @param gravite Niveau de gravité
-     * @param typeFeu Type de feu
+     * @brief Constructeur.
+     * @param loc Localisation.
+     * @param grav Gravité.
+     * @param type Type de feu.
+     * @param surf Superficie.
      */
-    Incendie(const std::string& id, const std::string& localisation, int gravite, const std::string& typeFeu);
+    Incendie(const std::string& loc, int grav, const std::string& type, double surf);
 
     /**
-     * @brief Évalue la priorité de l'incendie
-     * @return Un entier représentant la priorité
+     * @brief Retourne une description de l’incendie.
+     * @return Description textuelle.
      */
-    int evaluerPriorite() const override;
-
-    // Getter
-    std::string getTypeFeu() const;
+    std::string description() const override;
 };
 
-#endif // INCENDIE_H
+#endif // INCENDIE_HPP

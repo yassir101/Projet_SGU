@@ -1,46 +1,31 @@
-/**
- * @file Accident.h
- * @brief Classe représentant une urgence de type accident.
- */
+#ifndef ACCIDENT_HPP
+#define ACCIDENT_HPP
 
-#ifndef ACCIDENT_H
-#define ACCIDENT_H
-
-#include "Urgence.h"
+#include "Urgence.hpp"
 
 /**
- * @class Accident
- * @brief Spécialisation de la classe Urgence pour un accident (routier ou autre).
+ * @brief Représente une urgence de type accident dans le SGU.
  */
 class Accident : public Urgence {
 private:
-    int nbVehiculesImpliques;     ///< Nombre de véhicules impliqués dans l'accident
-    std::string typeAccident;     ///< Type d'accident (collision, carambolage, etc.)
-    bool presenceBlesses;         ///< Indique s'il y a des blessés
+    int nombreVehicules; /**< Nombre de véhicules impliqués */
+    int nombreBlesses;   /**< Nombre de blessés */
 
 public:
     /**
-     * @brief Constructeur de la classe Accident
-     * @param id Identifiant unique
-     * @param localisation Lieu de l'accident
-     * @param gravite Niveau de gravité
-     * @param nbVehicules Nombre de véhicules impliqués
-     * @param typeAccident Description du type d'accident
-     * @param blesses Présence de blessés (true/false)
+     * @brief Constructeur.
+     * @param loc Localisation.
+     * @param grav Gravité.
+     * @param nbVeh Nombre de véhicules.
+     * @param nbBless Nombre de blessés.
      */
-    Accident(const std::string& id, const std::string& localisation, int gravite,
-             int nbVehicules, const std::string& typeAccident, bool blesses);
+    Accident(const std::string& loc, int grav, int nbVeh, int nbBless);
 
     /**
-     * @brief Évalue la priorité de traitement de l'accident
-     * @return Un entier représentant la priorité
+     * @brief Retourne une description de l’accident.
+     * @return Description textuelle.
      */
-    int evaluerPriorite() const override;
-
-    // Getters
-    int getNbVehiculesImpliques() const;
-    std::string getTypeAccident() const;
-    bool getPresenceBlesses() const;
+    std::string description() const override;
 };
 
-#endif // ACCIDENT_H
+#endif // ACCIDENT_HPP
