@@ -1,46 +1,31 @@
-/**
- * @file UrgenceMedicale.h
- * @brief Classe représentant une urgence de type médicale.
- */
+#ifndef URGENCEMEDICALE_HPP
+#define URGENCEMEDICALE_HPP
 
-#ifndef URGENCEMEDICALE_H
-#define URGENCEMEDICALE_H
-
-#include "Urgence.h"
+#include "Urgence.hpp"
 
 /**
- * @class UrgenceMedicale
- * @brief Spécialisation de la classe Urgence pour un cas médical.
+ * @brief Représente une urgence médicale dans le SGU.
  */
 class UrgenceMedicale : public Urgence {
 private:
-    bool urgenceVitale;             ///< Indique si la vie du patient est en danger immédiat
-    int nbVictimes;                 ///< Nombre de victimes concernées
-    std::string pathologiePresumee; ///< Type de pathologie suspectée
+    std::string pathologie; /**< Type de pathologie (ex. arrêt cardiaque) */
+    int nombreVictimes;     /**< Nombre de victimes */
 
 public:
     /**
-     * @brief Constructeur de la classe UrgenceMedicale
-     * @param id Identifiant de l'urgence
-     * @param localisation Localisation géographique
-     * @param gravite Niveau de gravité
-     * @param vitale Urgence vitale (oui/non)
-     * @param nbVictimes Nombre de personnes concernées
-     * @param pathologie Type de pathologie suspectée
+     * @brief Constructeur.
+     * @param loc Localisation.
+     * @param grav Gravité.
+     * @param patho Type de pathologie.
+     * @param nbVict Nombre de victimes.
      */
-    UrgenceMedicale(const std::string& id, const std::string& localisation, int gravite,
-                    bool vitale, int nbVictimes, const std::string& pathologie);
+    UrgenceMedicale(const std::string& loc, int grav, const std::string& patho, int nbVict);
 
     /**
-     * @brief Évalue la priorité de l'urgence médicale
-     * @return Un entier représentant la priorité
+     * @brief Retourne une description de l’urgence médicale.
+     * @return Description textuelle.
      */
-    int evaluerPriorite() const override;
-
-    // Getters
-    bool estUrgenceVitale() const;
-    int getNbVictimes() const;
-    std::string getPathologiePresumee() const;
+    std::string description() const override;
 };
 
-#endif // URGENCEMEDICALE_H
+#endif // URGENCEMEDICALE_HPP
