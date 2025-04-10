@@ -1,8 +1,13 @@
 #include "Incendie.hpp"
 
-Incendie::Incendie(const std::string& loc, int grav, const std::string& type, double surf) 
-    : Urgence(loc, grav), typeFeu(type), superficie(surf) {}
+Incendie::Incendie(const std::string& id, const std::string& type, const std::string& loc, int grav,
+                   const std::string& typeFeu) 
+    : Urgence(id, type, loc, grav), typeFeu(typeFeu) {}
 
-std::string Incendie::description() const {
-    return "Incendie de type " + typeFeu + " à " + localisation + " (superficie: " + std::to_string(superficie) + " m²)";
+int Incendie::evaluerPriorite() const {
+    // Les incendies de forêt sont plus prioritaires
+    if (typeFeu == "forêt") {
+        return niveauGravite + 1;
+    }
+    return niveauGravite;
 }

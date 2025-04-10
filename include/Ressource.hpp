@@ -1,27 +1,35 @@
 #ifndef RESSOURCE_HPP
 #define RESSOURCE_HPP
 
-#include <string>
+#include "Intervention.hpp"
 
 /**
- * @brief Classe abstraite représentant une ressource mobilisable dans le SGU.
+ * @brief Représente une ressource mobilisable dans le SGU.
  */
-class Ressource {
+class Ressource : public Intervention {
 protected:
-    std::string nom;       /**< Nom ou identifiant de la ressource */
-    bool disponible;       /**< État de disponibilité */
+    std::string id;       /**< Identifiant spécifique de la ressource */
+    bool disponible;      /**< État de disponibilité */
 
 public:
     /**
      * @brief Constructeur.
-     * @param n Nom de la ressource.
+     * @param idIntervention Identifiant de l’intervention (hérité).
+     * @param debut Date et heure de début (hérité).
+     * @param idRessource Identifiant spécifique de la ressource.
      */
-    Ressource(const std::string& n);
+    Ressource(const std::string& idIntervention, const std::string& debut, const std::string& idRessource);
 
     /**
      * @brief Destructeur virtuel.
      */
     virtual ~Ressource() = default;
+
+    /**
+     * @brief Récupère l’identifiant spécifique de la ressource.
+     * @return L’identifiant de la ressource.
+     */
+    std::string getIdRessource() const;
 
     /**
      * @brief Vérifie la disponibilité.
@@ -30,16 +38,14 @@ public:
     bool estDisponible() const;
 
     /**
-     * @brief Définit la disponibilité.
-     * @param disp Nouvel état.
+     * @brief Affecte la ressource à une intervention.
      */
-    void setDisponible(bool disp);
+    void affecter();
 
     /**
-     * @brief Méthode virtuelle pure pour décrire la ressource.
-     * @return Description textuelle spécifique.
+     * @brief Libère la ressource après usage.
      */
-    virtual std::string typeRessource() const = 0;
+    void liberer();
 };
 
 #endif // RESSOURCE_HPP

@@ -5,17 +5,20 @@
 #include "Ressource.hpp"
 
 /**
- * @brief Gère l’ensemble des ressources disponibles dans le SGU.
+ * @brief Représente un stock de ressources dans le SGU, qui est lui-même une ressource.
  */
-class StockRessources {
+class StockRessources : public Ressource {
 private:
-    std::vector<Ressource*> ressources; /**< Liste des ressources */
+    std::vector<Ressource*> ressourcesDisponibles; /**< Liste des ressources gérées par le stock */
 
 public:
     /**
-     * @brief Constructeur par défaut.
+     * @brief Constructeur.
+     * @param idIntervention Identifiant de l’intervention (hérité de Intervention).
+     * @param debut Date et heure de début (hérité de Intervention).
+     * @param idRessource Identifiant spécifique de la ressource (hérité de Ressource).
      */
-    StockRessources();
+    StockRessources(const std::string& idIntervention, const std::string& debut, const std::string& idRessource);
 
     /**
      * @brief Destructeur pour libérer la mémoire.
@@ -23,17 +26,16 @@ public:
     ~StockRessources();
 
     /**
-     * @brief Ajoute une ressource au stock.
-     * @param r Pointeur vers la ressource.
+     * @brief Met à jour la disponibilité des ressources.
      */
-    void ajouterRessource(Ressource* r);
+    void mettreAJourDisponibilite();
 
     /**
-     * @brief Recherche une ressource disponible par type.
-     * @param type Type de ressource recherché.
-     * @return Pointeur vers la ressource ou nullptr si aucune disponible.
+     * @brief Vérifie si une ressource est disponible pour un utilisateur.
+     * @param dest Utilisateur demandant la ressource.
+     * @return True si une ressource est disponible, false sinon.
      */
-    Ressource* trouverRessourceDisponible(const std::string& type);
+    bool verifierDisponibilite(const std::string& dest);
 };
 
 #endif // STOCKRESSOURCES_HPP
