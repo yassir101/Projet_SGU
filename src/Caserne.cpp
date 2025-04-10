@@ -1,4 +1,4 @@
-#include "Caserne.hpp"
+#include "../include/Caserne.hpp"
 
 Caserne::Caserne(const std::string& id, int nbEquipes)
     : Ressource(id), nbEquipesDisponibles(nbEquipes) {}

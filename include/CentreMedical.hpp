@@ -1,55 +1,55 @@
 /**
- * @file Caserne.hpp
- * @brief Ressource de type caserne de pompiers
+ * @file CentreMedical.hpp
+ * @brief Ressource de type centre médical
  */
 
-#ifndef CASERNE_HPP
-#define CASERNE_HPP
+#ifndef CENTRE_MEDICAL_HPP
+#define CENTRE_MEDICAL_HPP
 
 #include "Ressource.hpp"
 
 /**
- * @class Caserne
- * @brief Caserne de pompiers pouvant fournir des équipes d'intervention
+ * @class CentreMedical
+ * @brief Centre de soins pouvant accueillir des victimes
  * 
- * Spécialisation concrète de Ressource pour les casernes de pompiers
+ * Gère principalement la disponibilité des lits d'hôpital
  */
-class Caserne : public Ressource {
+class CentreMedical : public Ressource {
 private:
-    int nbEquipesDisponibles;   ///< Nombre d'équipes actuellement disponibles
+    int litsDisponibles;    ///< Nombre de lits actuellement disponibles
 
 public:
     /**
      * @brief Constructeur
-     * @param id Identifiant de la caserne
-     * @param nbEquipes Nombre initial d'équipes disponibles
+     * @param id Identifiant du centre
+     * @param lits Nombre initial de lits disponibles
      */
-    Caserne(const std::string& id, int nbEquipes);
+    CentreMedical(const std::string& id, int lits);
     
     // Implémentation des méthodes virtuelles
     void affecter() override;
     void liberer() override;
     
-    /// @name Opérations spécifiques
+    /// @name Gestion des lits
     /// @{
     /**
-     * @brief Envoie une équipe sur le terrain
-     * @post Décrémente nbEquipesDisponibles
+     * @brief Réserve un lit
+     * @post Décrémente litsDisponibles
      */
-    void envoyerEquipe();
+    void affecterLit();
     
     /**
-     * @brief Rappelle une équipe
-     * @post Incrémente nbEquipesDisponibles
+     * @brief Libère un lit
+     * @post Incrémente litsDisponibles
      */
-    void rappelerEquipe();
+    void libererLit();
     /// @}
     
     /**
-     * @brief Nombre d'équipes disponibles
-     * @return Entier représentant le nombre d'équipes
+     * @brief Nombre de lits disponibles
+     * @return Entier représentant les lits libres
      */
-    int getNbEquipesDisponibles() const;
+    int getLitsDisponibles() const;
 };
 
-#endif // CASERNE_HPP
+#endif // CENTRE_MEDICAL_HPP

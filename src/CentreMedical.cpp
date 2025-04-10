@@ -1,4 +1,4 @@
-#include "CentreMedical.hpp"
+#include "../include/CentreMedical.hpp"
 
 CentreMedical::CentreMedical(const std::string& id, int lits)
     : Ressource(id), litsDisponibles(lits) {}

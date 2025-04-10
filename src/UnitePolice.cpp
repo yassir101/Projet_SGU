@@ -1,4 +1,4 @@
-#include "UnitePolice.hpp"
+#include "../include/UnitePolice.hpp"
 
 UnitePolice::UnitePolice(const std::string& id, int nbAgents)
     : Ressource(id), nbAgentsDisponibles(nbAgents) {}

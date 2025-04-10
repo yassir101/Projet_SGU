@@ -1,4 +1,4 @@
-#include "SuiviIntervention.hpp"
+#include "../include/SuiviIntervention.hpp"
 
 SuiviIntervention::SuiviIntervention(std::shared_ptr<Intervention> intervention)
     : intervention(intervention), statut("initialisé") {}
