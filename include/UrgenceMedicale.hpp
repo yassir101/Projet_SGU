@@ -8,24 +8,25 @@
  */
 class UrgenceMedicale : public Urgence {
 private:
-    std::string pathologie; /**< Type de pathologie (ex. arrêt cardiaque) */
-    int nombreVictimes;     /**< Nombre de victimes */
+    int nbVictimes; /**< Nombre de victimes */
 
 public:
     /**
      * @brief Constructeur.
+     * @param id Identifiant.
+     * @param type Type d’urgence.
      * @param loc Localisation.
      * @param grav Gravité.
-     * @param patho Type de pathologie.
      * @param nbVict Nombre de victimes.
      */
-    UrgenceMedicale(const std::string& loc, int grav, const std::string& patho, int nbVict);
+    UrgenceMedicale(const std::string& id, const std::string& type, const std::string& loc, int grav,
+                    int nbVict);
 
     /**
-     * @brief Retourne une description de l’urgence médicale.
-     * @return Description textuelle.
+     * @brief Évalue la priorité de l’urgence médicale.
+     * @return La priorité ajustée.
      */
-    std::string description() const override;
+    int evaluerPriorite() const override;
 };
 
 #endif // URGENCEMEDICALE_HPP
