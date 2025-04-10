@@ -43,10 +43,10 @@ Projet_SGU/
 
 ## ✍️ Développé par
 
-- Yassir Ankoudy  
-- Cheikh Tourad Wedou  
-- Duquesnoy Samuel  
-- Guissou Dakisaglogo
+- A. Yassir  
+- C. T. Wedou  
+- D. Samuel  
+- G. Owen
 
 ---
 
