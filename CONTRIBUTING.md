@@ -144,7 +144,7 @@ git push origin dev
 ```bash
 Projet_SGU/
 ├── src/         -> code source principal
-├── include/     -> fichiers d’en-tête (.h)
+├── include/     -> fichiers d’en-tête (.hpp)
 ├── test/        -> tests unitaires
 ├── docs/        -> documentation Doxygen
 ├── data/        -> données éventuelles
@@ -152,15 +152,6 @@ Projet_SGU/
 ├── README.md    -> ce fichier
 └── .gitignore   -> fichiers ignorés par Git
 ```
-
----
-
-## 👥 Auteurs
-
-- Ankoudy Yassir  
-- Cheikh Tourad Wedou  
-- Duquesnoy Samuel  
-- Guissou Dakisaglogo  
 
 ---
 
