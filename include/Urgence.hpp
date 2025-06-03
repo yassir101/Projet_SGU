@@ -78,7 +78,7 @@ public:
      * @brief Évalue la priorité de l’urgence.
      * @return La priorité (basée sur le niveau de gravité).
      */
-    virtual int evaluerPriorite() const;
+    virtual int evaluerPriorite() const = 0;
     
     /**
      * @brief Met à jour le statut de l’urgence.

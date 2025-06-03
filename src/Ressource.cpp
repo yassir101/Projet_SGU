@@ -1,7 +1,7 @@
 #include "Ressource.hpp"
 
-Ressource::Ressource(const std::string& idIntervention, const std::string& debut, const std::string& idRessource) 
-    : Intervention(idIntervention, debut), id(idRessource), disponible(true) {}
+Ressource::Ressource(const std::string& idRessource)
+    : id(idRessource), disponible(true) {}
 
 std::string Ressource::getIdRessource() const {
     return id;

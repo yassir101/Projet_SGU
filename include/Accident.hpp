@@ -23,6 +23,13 @@ public:
              int nbVeh);
 
     /**
+     * @brief Fournit une description textuelle de l’accident.
+     * @return Une chaîne descriptive.
+     */
+    std::string description() const;
+
+
+    /**
      * @brief Évalue la priorité de l’accident.
      * @return La priorité ajustée.
      */

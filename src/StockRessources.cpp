@@ -1,30 +1,31 @@
-#include "StockRessources.hpp"
+#include "../include/StockRessources.hpp"
 
-StockRessources::StockRessources(const std::string& idIntervention, const std::string& debut, const std::string& idRessource) 
-    : Ressource(idIntervention, debut, idRessource) {}
+StockRessources::StockRessources(const std::string& id)
+    : Ressource(id) {}
 
-StockRessources::~StockRessources() {
-    for (auto r : ressourcesDisponibles) {
-        delete r;
-    }
+StockRessources::~StockRessources() = default;
+
+void StockRessources::ajouterRessource(std::shared_ptr<Ressource> ressource) {
+    ressourcesDisponibles.push_back(ressource);
 }
 
 void StockRessources::mettreAJourDisponibilite() {
-    // Logique fictive : vérifier si des ressources peuvent être libérées
-    for (auto r : ressourcesDisponibles) {
+    for (auto& r : ressourcesDisponibles) {
         if (!r->estDisponible()) {
-            // Exemple : libérer après un certain temps (logique à affiner)
             r->liberer();
         }
     }
 }
 
-bool StockRessources::verifierDisponibilite(const std::string& dest) {
-    // Vérifie si une ressource est disponible pour cet utilisateur
-    for (auto r : ressourcesDisponibles) {
+bool StockRessources::verifierDisponibilite(const std::string& /*type*/) const {
+    for (const auto& r : ressourcesDisponibles) {
         if (r->estDisponible()) {
             return true;
         }
     }
     return false;
+}
+
+const std::vector<std::shared_ptr<Ressource>>& StockRessources::getRessources() const {
+    return ressourcesDisponibles;
 }

@@ -12,6 +12,8 @@
 #include <vector>
 #include <memory>
 
+class SuiviIntervention; 
+
 /**
  * @class Intervention
  * @brief Représente une opération d'intervention sur une urgence
@@ -19,7 +21,7 @@
  * Cette classe gère le cycle de vie complet d'une intervention depuis son démarrage
  * jusqu'à sa clôture ou annulation, avec suivi des ressources mobilisées.
  */
-class Intervention {
+class Intervention : public std::enable_shared_from_this<Intervention> {
 private:
     std::string id;                 ///< Identifiant unique de l'intervention
     std::string debut;              ///< Date/heure de début (format ISO8601)

@@ -1,5 +1,7 @@
 #include "../include/Caserne.hpp"
 
+#include <stdexcept>
+
 Caserne::Caserne(const std::string& id, int nbEquipes)
     : Ressource(id), nbEquipesDisponibles(nbEquipes) {}
 

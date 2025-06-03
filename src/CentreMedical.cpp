@@ -1,5 +1,7 @@
 #include "../include/CentreMedical.hpp"
 
+#include <stdexcept>
+
 CentreMedical::CentreMedical(const std::string& id, int lits)
     : Ressource(id), litsDisponibles(lits) {}
 

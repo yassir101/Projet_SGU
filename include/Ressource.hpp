@@ -1,12 +1,12 @@
 #ifndef RESSOURCE_HPP
 #define RESSOURCE_HPP
 
-#include "Intervention.hpp"
+#include <string>
 
 /**
  * @brief Représente une ressource mobilisable dans le SGU.
  */
-class Ressource : public Intervention {
+class Ressource {
 protected:
     std::string id;       /**< Identifiant spécifique de la ressource */
     bool disponible;      /**< État de disponibilité */
@@ -14,11 +14,9 @@ protected:
 public:
     /**
      * @brief Constructeur.
-     * @param idIntervention Identifiant de l’intervention (hérité).
-     * @param debut Date et heure de début (hérité).
      * @param idRessource Identifiant spécifique de la ressource.
      */
-    Ressource(const std::string& idIntervention, const std::string& debut, const std::string& idRessource);
+    Ressource(const std::string& idRessource);
 
     /**
      * @brief Destructeur virtuel.
@@ -40,12 +38,12 @@ public:
     /**
      * @brief Affecte la ressource à une intervention.
      */
-    void affecter();
+    virtual void affecter();
 
     /**
      * @brief Libère la ressource après usage.
      */
-    void liberer();
+    virtual void liberer();
 };
 
 #endif // RESSOURCE_HPP

@@ -2,6 +2,8 @@
 #define STOCKRESSOURCES_HPP
 
 #include <vector>
+#include <memory>
+#include <string>
 #include "Ressource.hpp"
 
 /**
@@ -9,21 +11,24 @@
  */
 class StockRessources : public Ressource {
 private:
-    std::vector<Ressource*> ressourcesDisponibles; /**< Liste des ressources gérées par le stock */
+    std::vector<std::shared_ptr<Ressource>> ressourcesDisponibles;
 
 public:
     /**
      * @brief Constructeur.
-     * @param idIntervention Identifiant de l’intervention (hérité de Intervention).
-     * @param debut Date et heure de début (hérité de Intervention).
-     * @param idRessource Identifiant spécifique de la ressource (hérité de Ressource).
+     * @param id Identifiant de la ressource stock
      */
-    StockRessources(const std::string& idIntervention, const std::string& debut, const std::string& idRessource);
+    StockRessources(const std::string& id);
 
     /**
-     * @brief Destructeur pour libérer la mémoire.
+     * @brief Destructeur.
      */
     ~StockRessources();
+
+    /**
+     * @brief Ajoute une ressource au stock.
+     */
+    void ajouterRessource(std::shared_ptr<Ressource> ressource);
 
     /**
      * @brief Met à jour la disponibilité des ressources.
@@ -31,11 +36,11 @@ public:
     void mettreAJourDisponibilite();
 
     /**
-     * @brief Vérifie si une ressource est disponible pour un utilisateur.
-     * @param dest Utilisateur demandant la ressource.
-     * @return True si une ressource est disponible, false sinon.
+     * @brief Vérifie la disponibilité d’une ressource par type.
      */
-    bool verifierDisponibilite(const std::string& dest);
+    bool verifierDisponibilite(const std::string& type) const;
+
+    const std::vector<std::shared_ptr<Ressource>>& getRessources() const;
 };
 
 #endif // STOCKRESSOURCES_HPP

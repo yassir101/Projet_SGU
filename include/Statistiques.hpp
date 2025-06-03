@@ -35,8 +35,6 @@ public:
     void setTotal(int nouveauTotal);
 };
 
-};
-
 #endif // STATISTIQUES_HPP
 
 
