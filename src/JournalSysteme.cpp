@@ -1,20 +1,20 @@
 #include "../include/JournalSysteme.hpp"
+#include <iostream>
 
-// Constructeur
 JournalSysteme::JournalSysteme() {}
 
-// Enregistre un événement dans le journal
-void JournalSysteme::enregistrerEvenement() {
-    // À implémenter
+void JournalSysteme::enregistrerEvenement(const std::string& evenement) {
+    journal.push_back(evenement);
 }
 
-// Affiche tous les événements enregistrés
-void JournalSysteme::afficherJournal() {
-    // À implémenter
+void JournalSysteme::afficherJournal() const {
+    std::cout << "=== Journal du système ===" << std::endl;
+    for (const auto& e : journal) {
+        std::cout << "- " << e << std::endl;
+    }
 }
 
-// Journalise une annulation d'intervention
-void JournalSysteme::logAnnulation(Intervention& i) {
-    // À implémenter
+void JournalSysteme::logAnnulation(const Intervention& i) {
+    std::string ligne = "Intervention " + i.getId() + " annulée. Statut: " + i.getStatut();
+    journal.push_back(ligne);
 }
-

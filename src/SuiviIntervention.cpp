@@ -1,20 +1,29 @@
 #include "../include/SuiviIntervention.hpp"
+#include <iostream>
 
 SuiviIntervention::SuiviIntervention(std::shared_ptr<Intervention> intervention)
     : intervention(intervention), statut("initialisé") {}
 
 void SuiviIntervention::mettreAJour(const std::string& position, const std::string& statut) {
-    positionActuelle = position;
+    this->positionActuelle = position;
     this->statut = statut;
 }
 
 void SuiviIntervention::envoyerNotification() {
     if (auto interv = intervention.lock()) {
-        // Implémenter la notification
+        std::cout << "Notification : mise à jour de l’intervention " << interv->getId()
+                  << " — Position : " << positionActuelle << ", Statut : " << statut << std::endl;
     }
 }
 
-// Getters
-std::string SuiviIntervention::getPositionActuelle() const { return positionActuelle; }
-std::string SuiviIntervention::getStatut() const { return statut; }
-std::shared_ptr<Intervention> SuiviIntervention::getIntervention() const { return intervention.lock(); }
+std::string SuiviIntervention::getPositionActuelle() const {
+    return positionActuelle;
+}
+
+std::string SuiviIntervention::getStatut() const {
+    return statut;
+}
+
+std::shared_ptr<Intervention> SuiviIntervention::getIntervention() const {
+    return intervention.lock();
+}

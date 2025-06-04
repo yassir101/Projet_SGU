@@ -68,7 +68,7 @@ public:
      */
     void synchroniserDonneesExternes();
 
-
+};
 
 #endif // GESTIONNAIRE_URGENCE_HPP
 

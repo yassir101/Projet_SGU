@@ -1,22 +1,31 @@
-#include "StockRessources.hpp"
+#include "../include/StockRessources.hpp"
 
-StockRessources::StockRessources() {}
+StockRessources::StockRessources(const std::string& id)
+    : Ressource(id) {}
 
-StockRessources::~StockRessources() {
-    for (auto r : ressources) {
-        delete r;
-    }
+StockRessources::~StockRessources() = default;
+
+void StockRessources::ajouterRessource(std::shared_ptr<Ressource> ressource) {
+    ressourcesDisponibles.push_back(ressource);
 }
 
-void StockRessources::ajouterRessource(Ressource* r) {
-    ressources.push_back(r);
-}
-
-Ressource* StockRessources::trouverRessourceDisponible(const std::string& type) {
-    for (auto r : ressources) {
-        if (r->typeRessource() == type && r->estDisponible()) {
-            return r;
+void StockRessources::mettreAJourDisponibilite() {
+    for (auto& r : ressourcesDisponibles) {
+        if (!r->estDisponible()) {
+            r->liberer();
         }
     }
-    return nullptr;
+}
+
+bool StockRessources::verifierDisponibilite(const std::string& /*type*/) const {
+    for (const auto& r : ressourcesDisponibles) {
+        if (r->estDisponible()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const std::vector<std::shared_ptr<Ressource>>& StockRessources::getRessources() const {
+    return ressourcesDisponibles;
 }

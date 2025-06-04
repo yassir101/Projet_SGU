@@ -1,9 +1,13 @@
 #include "UrgenceMedicale.hpp"
 
-UrgenceMedicale::UrgenceMedicale(const std::string& loc, int grav, const std::string& patho, int nbVict) 
-    : Urgence(loc, grav), pathologie(patho), nombreVictimes(nbVict) {}
+UrgenceMedicale::UrgenceMedicale(const std::string& id, const std::string& type, const std::string& loc, int grav,
+                                int nbVict) 
+    : Urgence(id, type, loc, grav), nbVictimes(nbVict) {}
 
-std::string UrgenceMedicale::description() const {
-    return "Urgence médicale à " + localisation + " : " + pathologie + " affectant " + 
-           std::to_string(nombreVictimes) + " victime(s)";
+int UrgenceMedicale::evaluerPriorite() const {
+    // Ajustement : plus de victimes = plus prioritaire
+    if (nbVictimes > 3) {
+        return niveauGravite + 1;
+    }
+    return niveauGravite;
 }

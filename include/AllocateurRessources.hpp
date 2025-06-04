@@ -9,6 +9,7 @@
 #include "Intervention.hpp"
 #include "Urgence.hpp"
 #include "QuestionnaireUrgence.hpp"
+#include "Ressource.hpp"
 #include "Demandeur.hpp"
 #include <vector>
 #include <memory>

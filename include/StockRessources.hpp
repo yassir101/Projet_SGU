@@ -2,38 +2,45 @@
 #define STOCKRESSOURCES_HPP
 
 #include <vector>
+#include <memory>
+#include <string>
 #include "Ressource.hpp"
 
 /**
- * @brief Gère l’ensemble des ressources disponibles dans le SGU.
+ * @brief Représente un stock de ressources dans le SGU, qui est lui-même une ressource.
  */
-class StockRessources {
+class StockRessources : public Ressource {
 private:
-    std::vector<Ressource*> ressources; /**< Liste des ressources */
+    std::vector<std::shared_ptr<Ressource>> ressourcesDisponibles;
 
 public:
     /**
-     * @brief Constructeur par défaut.
+     * @brief Constructeur.
+     * @param id Identifiant de la ressource stock
      */
-    StockRessources();
+    StockRessources(const std::string& id);
 
     /**
-     * @brief Destructeur pour libérer la mémoire.
+     * @brief Destructeur.
      */
     ~StockRessources();
 
     /**
      * @brief Ajoute une ressource au stock.
-     * @param r Pointeur vers la ressource.
      */
-    void ajouterRessource(Ressource* r);
+    void ajouterRessource(std::shared_ptr<Ressource> ressource);
 
     /**
-     * @brief Recherche une ressource disponible par type.
-     * @param type Type de ressource recherché.
-     * @return Pointeur vers la ressource ou nullptr si aucune disponible.
+     * @brief Met à jour la disponibilité des ressources.
      */
-    Ressource* trouverRessourceDisponible(const std::string& type);
+    void mettreAJourDisponibilite();
+
+    /**
+     * @brief Vérifie la disponibilité d’une ressource par type.
+     */
+    bool verifierDisponibilite(const std::string& type) const;
+
+    const std::vector<std::shared_ptr<Ressource>>& getRessources() const;
 };
 
 #endif // STOCKRESSOURCES_HPP
