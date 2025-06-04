@@ -1,29 +1,34 @@
+/**
+ * @file Secouriste.hpp
+ * @brief Définition de la classe Secouriste pour le SGU.
+ */
+
 #ifndef SECOURISTE_HPP
 #define SECOURISTE_HPP
 
 #include "Utilisateur.hpp"
 #include <string>
-#include <iostream>
 
 /**
  * @class Secouriste
- * @brief Utilisateur intervenant sur le terrain pour gérer les urgences.
+ * @brief Utilisateur spécialisé qui intervient sur le terrain lors des urgences.
  *
- * Le secouriste hérite de la classe Utilisateur et ajoute des attributs
- * spécifiques comme le matricule et la spécialité.
+ * Un secouriste hérite des attributs et méthodes de la classe Utilisateur.
+ * Il possède en plus un matricule et une spécialité (incendie, médical, etc.).
+ * La disponibilité d’un secouriste est gérée via l’état hérité d’Utilisateur.
  */
 class Secouriste : public Utilisateur {
 private:
     std::string matricule;   ///< Matricule unique du secouriste
-    std::string specialite;  ///< Spécialité du secouriste (ex: incendie, médical...)
+    std::string specialite;  ///< Spécialité du secouriste (ex : incendie, médical...)
 
 public:
     /**
      * @brief Constructeur
-     * @param id Identifiant
-     * @param nom Nom
-     * @param matricule Matricule interne
-     * @param specialite Spécialité du secouriste
+     * @param id Identifiant unique du secouriste
+     * @param nom Nom du secouriste
+     * @param matricule Matricule administratif
+     * @param specialite Domaine d’intervention principal
      */
     Secouriste(const std::string& id, const std::string& nom,
                const std::string& matricule, const std::string& specialite);
@@ -44,31 +49,63 @@ public:
     void transmettrePosition() const;
 
     /**
-     * @brief Affiche une description textuelle du secouriste.
-     * @return Description au format lisible.
+     * @brief Renvoie une description textuelle du secouriste.
+     * @return Description lisible.
      */
     std::string toString() const;
 
     /**
-     * @brief Génère une commande SQL d’insertion du secouriste.
-     * @return Requête SQL formatée.
+     * @brief Génère une requête SQL d’insertion du secouriste.
+     * @return Chaîne de requête SQL.
      */
     std::string genererRequeteSQL() const;
-    
-    /**
- 	* @brief Retourne le type d'utilisateur (ici "Secouriste")
- 	* @return "Secouriste"
- 	*/
-	std::string getTypeUtilisateur() const override;
 
+    /**
+     * @brief Retourne le type d'utilisateur (ici "Secouriste").
+     * @return "Secouriste"
+     */
+    std::string getTypeUtilisateur() const override;
 
     /// @name Accesseurs
     /// @{
+    /**
+     * @brief Renvoie le matricule du secouriste.
+     * @return Matricule
+     */
     std::string getMatricule() const;
+
+    /**
+     * @brief Définit un nouveau matricule.
+     * @param m Nouveau matricule
+     */
     void setMatricule(const std::string& m);
 
+    /**
+     * @brief Renvoie la spécialité du secouriste.
+     * @return Spécialité
+     */
     std::string getSpecialite() const;
+
+    /**
+     * @brief Définit une nouvelle spécialité.
+     * @param s Nouvelle spécialité
+     */
     void setSpecialite(const std::string& s);
+    /// @}
+
+    /// @name Disponibilité
+    /// @{
+    /**
+     * @brief Indique si le secouriste est disponible pour une intervention.
+     * @return true si disponible (hérité d’Utilisateur)
+     */
+    bool estDisponible() const ;
+
+    /**
+     * @brief Modifie la disponibilité du secouriste.
+     * @param dispo true = disponible, false = indisponible
+     */
+    void setDisponible(bool dispo);
     /// @}
 };
 

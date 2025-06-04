@@ -21,7 +21,7 @@ Statistiques Archivage::genererStatistiques() {
     return stats;
 }
 
-Rapport Archivage::genererRapport() {
+Rapport Archivage::genererRapport() const {
     Rapport rapport;
     // À compléter : exporter les urgences, nb, durée...
     return rapport;

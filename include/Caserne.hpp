@@ -57,6 +57,9 @@ public:
      * @return Chaîne SQL INSERT.
      */
     std::string genererRequeteSQL() const;
+    
+    bool estDisponible() const;
+    
 };
 
 #endif // CASERNE_HPP

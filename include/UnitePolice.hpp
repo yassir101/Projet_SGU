@@ -73,6 +73,8 @@ public:
      * @return Requête SQL au format texte
      */
     std::string genererRequeteSQL() const;
+    
+    bool estDisponible() const;
 };
 
 #endif // UNITE_POLICE_HPP

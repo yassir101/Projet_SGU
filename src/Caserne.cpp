@@ -10,13 +10,11 @@ void Caserne::affecter() {
         throw std::runtime_error("Aucune équipe disponible à la caserne " + id);
     }
     nbEquipesDisponibles--;
-    disponible = (nbEquipesDisponibles > 0);
     std::cout << "[Caserne] Équipe envoyée depuis " << id << ", reste : " << nbEquipesDisponibles << std::endl;
 }
 
 void Caserne::liberer() {
     nbEquipesDisponibles++;
-    disponible = true;
     std::cout << "[Caserne] Équipe revenue à la caserne " << id << std::endl;
 }
 
@@ -35,8 +33,12 @@ int Caserne::getNbEquipesDisponibles() const {
     return nbEquipesDisponibles;
 }
 
+bool Caserne::estDisponible() const {
+    return nbEquipesDisponibles > 0;
+}
+
 std::string Caserne::genererRequeteSQL() const {
     return "INSERT INTO casernes (id, nb_equipes, disponible) VALUES ('" + id + "', " +
-           std::to_string(nbEquipesDisponibles) + ", " + (disponible ? "1" : "0") + ");";
+           std::to_string(nbEquipesDisponibles) + ", " + (estDisponible() ? "1" : "0") + ");";
 }
 

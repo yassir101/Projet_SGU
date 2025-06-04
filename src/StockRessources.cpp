@@ -13,7 +13,7 @@ void StockRessources::ajouterRessource(std::shared_ptr<Ressource> ressource) {
 
 void StockRessources::mettreAJourDisponibilite() {
     for (auto& r : ressourcesDisponibles) {
-        // ici, on pourrait par exemple ping le système de terrain ou attendre mise à jour
+        // Actualiser disponibilité selon équipe secouristes dans chaque ressource
         if (!r->estDisponible()) {
             std::cout << "[MAJ] Ressource " << r->getIdRessource() << " indisponible.\n";
         }
@@ -22,7 +22,7 @@ void StockRessources::mettreAJourDisponibilite() {
 
 bool StockRessources::verifierDisponibilite(const std::string& type) const {
     for (const auto& r : ressourcesDisponibles) {
-        if (r->estDisponible() && r->getType() == type) {
+        if (r->getType() == type && r->estDisponible()) {
             return true;
         }
     }
@@ -37,7 +37,8 @@ std::string StockRessources::toString() const {
     std::ostringstream oss;
     oss << "Stock[" << getIdRessource() << "] contient " << ressourcesDisponibles.size() << " ressources :\n";
     for (const auto& r : ressourcesDisponibles) {
-        oss << " - " << r->getType() << " (" << r->getIdRessource() << ")\n";
+        oss << " - " << r->getType() << " (" << r->getIdRessource() << ") "
+            << (r->estDisponible() ? "[Disponible]" : "[Indisponible]") << "\n";
     }
     return oss.str();
 }

@@ -1,4 +1,5 @@
 #include "../include/Secouriste.hpp"
+#include <iostream>
 
 Secouriste::Secouriste(const std::string& id, const std::string& nom,
                        const std::string& matricule, const std::string& specialite)
@@ -45,3 +46,7 @@ std::string Secouriste::genererRequeteSQL() const {
         + id + "', '" + nom + "', '" + matricule + "', '" + specialite + "');";
 }
 
+bool Secouriste::estDisponible() const {
+    // à développer après
+    return true;
+}

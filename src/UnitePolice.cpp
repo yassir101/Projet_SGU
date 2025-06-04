@@ -39,6 +39,10 @@ std::string UnitePolice::genererRequeteSQL() const {
     return "INSERT INTO unite_police (id, nb_agents, disponible) VALUES ('" + id + "', " 
         + std::to_string(nbAgentsDisponibles) + ", " + (estDisponible() ? "1" : "0") + ");";
 }
+bool UnitePolice::estDisponible() const {
+    return nbAgentsDisponibles > 0;
+}
+
 
 std::string UnitePolice::getType() const {
     return "UnitePolice";

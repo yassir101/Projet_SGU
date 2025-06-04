@@ -10,13 +10,11 @@ void CentreMedical::affecter() {
         throw std::runtime_error("Aucune ambulance disponible au centre " + id);
     }
     ambulancesDisponibles--;
-    disponible = (ambulancesDisponibles > 0);
     std::cout << "[Centre Médical] Ambulance affectée — Restantes : " << ambulancesDisponibles << std::endl;
 }
 
 void CentreMedical::liberer() {
     ambulancesDisponibles++;
-    disponible = true;
     std::cout << "[Centre Médical] Ambulance rappelée — Disponibles : " << ambulancesDisponibles << std::endl;
 }
 
@@ -36,8 +34,13 @@ std::string CentreMedical::getType() const {
     return "CentreMedical";
 }
 
+bool CentreMedical::estDisponible() const {
+    return ambulancesDisponibles > 0;
+}
+
+
 std::string CentreMedical::genererRequeteSQL() const {
     return "INSERT INTO centres_medicaux (id, ambulances_disponibles, disponible) VALUES ('" + id + "', " +
-           std::to_string(ambulancesDisponibles) + ", " + (disponible ? "1" : "0") + ");";
+           std::to_string(ambulancesDisponibles) + ", " + (estDisponible() ? "1" : "0") + ");";
 }
 
