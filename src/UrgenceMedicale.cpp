@@ -11,3 +11,18 @@ int UrgenceMedicale::evaluerPriorite() const {
     }
     return niveauGravite;
 }
+
+int UrgenceMedicale::getNbVictimes() const {
+    return nbVictimes;
+}
+
+void UrgenceMedicale::setNbVictimes(int nb) {
+    nbVictimes = nb;
+}
+
+std::string UrgenceMedicale::genererRequeteSQL() const {
+    return "INSERT INTO urgences (id, type, localisation, gravite, statut, priorite, nbVictimes) VALUES ('"
+        + id + "', '" + type + "', '" + localisation + "', " + std::to_string(niveauGravite) + ", '" 
+        + statut + "', " + std::to_string(priorite) + ", " + std::to_string(nbVictimes) + ");";
+}
+

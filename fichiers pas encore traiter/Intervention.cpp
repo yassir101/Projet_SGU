@@ -63,18 +63,6 @@ std::string Intervention::getStatut() const {
     return statut;
 }
 
-std::string Intervention::getDebut() const {
-    return debut;
-}
-
-std::string Intervention::getFin() const {
-    return fin;
-}
-
-std::string Intervention::getRaisonAnnulation() const {
-    return raisonAnnulation;
-}
-
 std::shared_ptr<Urgence> Intervention::getUrgence() const {
     return urgence;
 }
@@ -86,19 +74,3 @@ std::shared_ptr<SuiviIntervention> Intervention::getSuivi() const {
 const std::vector<std::shared_ptr<Ressource>>& Intervention::getRessources() const {
     return ressources;
 }
-
-std::string Intervention::toString() const {
-    std::ostringstream oss;
-    oss << "[Intervention #" << id << "] Statut: " << statut 
-        << ", Début: " << debut << ", Fin: " << fin;
-    return oss.str();
-}
-
-std::string Intervention::genererRequeteSQL() const {
-    std::ostringstream oss;
-    oss << "INSERT INTO interventions (id, statut, debut, fin, raison_annulation, id_urgence) VALUES ('"
-        << id << "', '" << statut << "', '" << debut << "', '" << fin << "', '"
-        << raisonAnnulation << "', '" << urgence->getIdUrgence() << "');";
-    return oss.str();
-}
-

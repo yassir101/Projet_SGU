@@ -31,16 +31,33 @@ public:
     void ajouterRessource(std::shared_ptr<Ressource> ressource);
 
     /**
-     * @brief Met à jour la disponibilité des ressources.
+     * @brief Met à jour les statuts de disponibilité des ressources.
      */
     void mettreAJourDisponibilite();
 
     /**
      * @brief Vérifie la disponibilité d’une ressource par type.
+     * @param type Type recherché
+     * @return true si une ressource disponible du type est trouvée
      */
     bool verifierDisponibilite(const std::string& type) const;
 
+    /**
+     * @brief Retourne les ressources du stock.
+     */
     const std::vector<std::shared_ptr<Ressource>>& getRessources() const;
+
+    /**
+     * @brief Retourne une description textuelle du stock.
+     */
+    std::string toString() const;
+
+    /**
+     * @brief Génère une requête SQL pour enregistrer le stock (ou ses ressources).
+     * @return Requête SQL
+     */
+    std::string genererRequeteSQL() const;
 };
 
 #endif // STOCKRESSOURCES_HPP
+

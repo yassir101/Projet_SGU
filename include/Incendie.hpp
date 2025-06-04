@@ -33,6 +33,19 @@ public:
      * @return La priorité ajustée.
      */
     int evaluerPriorite() const override;
+    
+    /** @brief Accès au type de feu */
+    std::string getTypeFeu() const;
+
+    /** @brief Mise à jour du type de feu */
+    void setTypeFeu(const std::string& tf);
+    
+    /**
+     * @brief Convertit l'objet en commande SQL INSERT.
+     * @return Chaîne SQL à exécuter.
+     */
+    std::string genererRequeteSQL() const override;
+
 };
 
 #endif // INCENDIE_HPP

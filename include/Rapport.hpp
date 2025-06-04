@@ -10,30 +10,63 @@
 
 /**
  * @class Rapport
- * @brief Classe représentant un rapport généré par le système.
- *
- * Cette classe contient le contenu textuel d’un rapport, et fournit
- * des méthodes pour l’exporter dans différents formats.
+ * @brief Classe représentant un rapport généré par le système SGU.
  */
 class Rapport {
 private:
-    std::string contenu; /*!< Contenu textuel du rapport */
+    std::string titre;     ///< Titre du rapport
+    std::string contenu;   ///< Contenu textuel du rapport
 
 public:
-    /// @brief Constructeur par défaut
+    /**
+     * @brief Constructeur par défaut
+     */
     Rapport();
 
-    /// @brief Exporte le rapport au format CSV
-    void exporterCSV();
+    /**
+     * @brief Constructeur avec titre et contenu
+     * @param titre Titre du rapport
+     * @param contenu Contenu du rapport
+     */
+    Rapport(const std::string& titre, const std::string& contenu);
 
-    /// @brief Exporte le rapport au format PDF
-    void exporterPDF();
+    /**
+     * @brief Exporte le rapport au format CSV (affichage console pour l’instant)
+     */
+    void exporterCSV() const;
 
-    /// @brief Accesseur du contenu du rapport
+    /**
+     * @brief Exporte le rapport au format PDF (simulation)
+     */
+    void exporterPDF() const;
+
+    /**
+     * @brief Retourne le contenu textuel du rapport
+     */
     std::string getContenu() const;
 
-    /// @brief Modifie le contenu du rapport (si nécessaire)
+    /**
+     * @brief Retourne le titre du rapport
+     */
+    std::string getTitre() const;
+
+    /**
+     * @brief Met à jour le contenu
+     * @param nouveauContenu Nouveau texte à insérer
+     */
     void setContenu(const std::string& nouveauContenu);
+
+    /**
+     * @brief Met à jour le titre
+     * @param nouveauTitre Nouveau titre du rapport
+     */
+    void setTitre(const std::string& nouveauTitre);
+
+    /**
+     * @brief Retourne une chaîne complète représentant le rapport
+     * @return Texte complet formaté
+     */
+    std::string toString() const;
 };
 
 #endif // RAPPORT_HPP

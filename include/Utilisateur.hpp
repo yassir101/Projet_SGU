@@ -56,6 +56,13 @@ public:
      * @param nouveauNom Nom à affecter
      */
     void setNom(const std::string& nouveauNom);
+    
+    /**
+ 	* @brief Renvoie le type de l'utilisateur (Demandeur, Secouriste, etc.)
+ 	* @return Type textuel de l'utilisateur
+ 	*/
+virtual std::string getTypeUtilisateur() const = 0;
+
 };
 
 #endif // UTILISATEUR_HPP

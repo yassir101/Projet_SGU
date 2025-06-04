@@ -1,55 +1,76 @@
-/**
- * @file CentreMedical.hpp
- * @brief Ressource de type centre médical
- */
-
 #ifndef CENTRE_MEDICAL_HPP
 #define CENTRE_MEDICAL_HPP
 
 #include "Ressource.hpp"
 
 /**
+ * @file CentreMedical.hpp
+ * @brief Déclaration de la classe CentreMedical
+ */
+
+/**
  * @class CentreMedical
- * @brief Centre de soins pouvant accueillir des victimes
- * 
- * Gère principalement la disponibilité des lits d'hôpital
+ * @brief Centre médical disposant d’ambulances mobilisables.
+ *
+ * Cette classe hérite de Ressource et représente un centre médical capable
+ * de déployer des ambulances en réponse à une urgence. Chaque ambulance est considérée
+ * comme une unité mobilisable pour les opérations d’évacuation et de soins d’urgence.
  */
 class CentreMedical : public Ressource {
 private:
-    int litsDisponibles;    ///< Nombre de lits actuellement disponibles
+    int ambulancesDisponibles; ///< Nombre d’ambulances actuellement disponibles
 
 public:
     /**
-     * @brief Constructeur
-     * @param id Identifiant du centre
-     * @param lits Nombre initial de lits disponibles
+     * @brief Constructeur du centre médical
+     * @param id Identifiant unique de la ressource (hérité)
+     * @param nbAmbulances Nombre initial d’ambulances disponibles
      */
-    CentreMedical(const std::string& id, int lits);
-    
-    // Implémentation des méthodes virtuelles
+    CentreMedical(const std::string& id, int nbAmbulances);
+
+    /**
+     * @brief Affecte une ambulance à une intervention
+     * 
+     * Décrémente le nombre d’ambulances disponibles.
+     * Lance une exception si aucune ambulance n’est disponible.
+     */
     void affecter() override;
+
+    /**
+     * @brief Libère une ambulance
+     *
+     * Incrémente le nombre d’ambulances disponibles.
+     */
     void liberer() override;
     
-    /// @name Gestion des lits
-    /// @{
+    std::string getType() const override;
+
     /**
-     * @brief Réserve un lit
-     * @post Décrémente litsDisponibles
+     * @brief Envoie une ambulance sur le terrain.
+     * 
+     * Méthode d’alias pour `affecter()`.
      */
-    void affecterLit();
-    
+    void envoyerAmbulance();
+
     /**
-     * @brief Libère un lit
-     * @post Incrémente litsDisponibles
+     * @brief Rappelle une ambulance au centre.
+     *
+     * Méthode d’alias pour `liberer()`.
      */
-    void libererLit();
-    /// @}
-    
+    void rappelerAmbulance();
+
     /**
-     * @brief Nombre de lits disponibles
-     * @return Entier représentant les lits libres
+     * @brief Accesseur du nombre d’ambulances disponibles
+     * @return Entier représentant le stock actuel
      */
-    int getLitsDisponibles() const;
+    int getAmbulancesDisponibles() const;
+
+    /**
+     * @brief Génère une requête SQL d’insertion correspondant à l’état du centre
+     * @return Chaîne de requête SQL
+     */
+    std::string genererRequeteSQL() const;
 };
 
 #endif // CENTRE_MEDICAL_HPP
+

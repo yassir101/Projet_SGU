@@ -21,6 +21,12 @@ public:
      */
     Accident(const std::string& id, const std::string& type, const std::string& loc, int grav,
              int nbVeh);
+     
+    /** @brief Accès au nombre de véhicules */
+    int getNbVehicules() const;
+
+    /** @brief Mise à jour du nombre de véhicules */
+    void setNbVehicules(int nbVeh);
 
     /**
      * @brief Fournit une description textuelle de l’accident.
@@ -34,6 +40,12 @@ public:
      * @return La priorité ajustée.
      */
     int evaluerPriorite() const override;
+    
+    /**
+     * @brief Convertit l'objet en commande SQL INSERT.
+     * @return Chaîne SQL à exécuter.
+     */
+    std::string genererRequeteSQL() const override;
 };
 
 #endif // ACCIDENT_HPP

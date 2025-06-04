@@ -1,4 +1,4 @@
-#include "QuestionnaireUrgence.hpp"
+#include "../include/QuestionnaireUrgence.hpp"
 #include <iostream>
 
 QuestionnaireUrgence::QuestionnaireUrgence() : complet(false) {}
@@ -36,7 +36,7 @@ void QuestionnaireUrgence::remplir() {
             std::cin >> reponseIndex;
         } while (reponseIndex < 1 || static_cast<size_t>(reponseIndex) > choix.size());
 
-        std::cin.ignore(); // pour gérer le retour chariot après cin >>
+        std::cin.ignore(); // gestion retour chariot
         reponses[question] = choix[reponseIndex - 1];
     }
 
@@ -60,7 +60,7 @@ bool QuestionnaireUrgence::estComplet() const {
 }
 
 void QuestionnaireUrgence::transmettreReponses() const {
-    std::cout << "Transmission des réponses :\n";
+    std::cout << "\n[SGU] Réponses transmises au système :" << std::endl;
     for (const auto& [question, reponse] : reponses) {
         std::cout << "- " << question << " → " << reponse << std::endl;
     }
@@ -69,3 +69,4 @@ void QuestionnaireUrgence::transmettreReponses() const {
 const std::vector<std::string>& QuestionnaireUrgence::getQuestions() const {
     return questions;
 }
+

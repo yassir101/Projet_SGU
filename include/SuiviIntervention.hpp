@@ -6,9 +6,11 @@
 #ifndef SUIVI_INTERVENTION_HPP
 #define SUIVI_INTERVENTION_HPP
 
-#include "Intervention.hpp"
-#include <memory>
 
+#include <memory>
+#include <string>
+
+class Intervention;
 /**
  * @class SuiviIntervention
  * @brief Tracking temps réel d'une intervention
@@ -40,11 +42,25 @@ public:
      */
     void envoyerNotification();
     
+    /**
+     * @brief Représentation textuelle du suivi
+     * @return Chaîne formatée
+     */
+    std::string toString() const;
+
+    /**
+     * @brief Génère une requête SQL d'insertion
+     * @return Requête SQL pour la base de données
+     */
+    std::string genererRequeteSQL() const;
+
     /// @name Accesseurs
     /// @{
     std::string getPositionActuelle() const;
     std::string getStatut() const;
     std::shared_ptr<Intervention> getIntervention() const;
+    void setPositionActuelle(const std::string& pos);
+    void setStatut(const std::string& statut);
     /// @}
 };
 

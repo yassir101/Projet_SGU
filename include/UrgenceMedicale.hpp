@@ -27,6 +27,18 @@ public:
      * @return La priorité ajustée.
      */
     int evaluerPriorite() const override;
+    
+    /** @brief Accès au nombre de victimes */
+    int getNbVictimes() const;
+
+    /** @brief Mise à jour du nombre de victimes */
+    void setNbVictimes(int nb);
+    
+    /**
+     * @brief Convertit l'objet en commande SQL INSERT.
+     * @return Chaîne SQL à exécuter.
+     */
+    std::string genererRequeteSQL() const override;
 };
 
 #endif // URGENCEMEDICALE_HPP

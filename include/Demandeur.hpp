@@ -26,6 +26,13 @@ public:
 
     std::string getTelephone() const;
     void setTelephone(const std::string& tel);
+    
+    /**
+ 	* @brief Retourne le type de l'utilisateur (Demandeur ici)
+ 	* @return "Demandeur"
+ 	*/
+    std::string getTypeUtilisateur() const override;
+
 };
 
 #endif // DEMANDEUR_HPP

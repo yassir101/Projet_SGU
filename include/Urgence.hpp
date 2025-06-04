@@ -2,28 +2,32 @@
 #define URGENCE_HPP
 
 #include <string>
+#include <vector>
+#include "Ressource.hpp"
 
 /**
  * @brief Classe abstraite représentant une urgence dans le SGU.
  *
- * Cette classe sert de base pour toutes les urgences signalées, avec des informations
- * comme l’identifiant, le type, la localisation, la gravité et le statut.
+ * Sert de base aux types d’urgence spécifiques (incendie, accident, médicale...).
+ * Contient les informations communes et les méthodes génériques.
  */
 class Urgence {
 protected:
-    std::string id;           /**< Identifiant unique de l’urgence */
-    std::string type;         /**< Type d’urgence (ex. : "Incendie", "Accident") */
-    std::string localisation; /**< Localisation de l’urgence (adresse ou GPS) */
-    int niveauGravite;        /**< Niveau de gravité (1: mineur, 2: majeur, 3: critique) */
-    std::string statut;       /**< Statut actuel (en attente, en cours, terminée) */
+    std::string id;                  /**< Identifiant unique de l’urgence */
+    std::string type;                /**< Type d’urgence (incendie, accident...) */
+    std::string localisation;        /**< Adresse ou point GPS de l’incident */
+    int niveauGravite;               /**< Gravité : 1 (mineur), 2 (majeur), 3 (critique) */
+    std::string statut;              /**< Statut de l’intervention */
+    int priorite;                    /**< Priorité calculée */
+    std::vector<Ressource> ressources; /**< Liste des ressources affectées */
 
 public:
     /**
-     * @brief Constructeur avec paramètres.
-     * @param id Identifiant unique.
-     * @param type Type d’urgence.
-     * @param loc Localisation.
-     * @param grav Niveau de gravité (1 à 3).
+     * @brief Constructeur principal
+     * @param id Identifiant unique
+     * @param type Type d’urgence
+     * @param loc Localisation
+     * @param grav Niveau de gravité
      */
     Urgence(const std::string& id, const std::string& type, const std::string& loc, int grav);
 
@@ -32,58 +36,70 @@ public:
      */
     virtual ~Urgence() = default;
 
-    /**
-     * @brief Récupère l’identifiant.
-     * @return L’identifiant sous forme de chaîne.
-     */
-    std::string getId() const;
+    /** @return L’identifiant de l’urgence */
+    std::string getIdUrgence() const;
 
-    /**
-     * @brief Récupère le type.
-     * @return Le type sous forme de chaîne.
-     */
-    std::string getType() const;
+    /** @return Le type d’urgence */
+    std::string getTypeUrgence() const;
 
-    /**
-     * @brief Récupère la localisation.
-     * @return La localisation sous forme de chaîne.
-     */
+    /** @return La localisation de l’incident */
     std::string getLocalisation() const;
 
-    /**
-     * @brief Définit la localisation.
-     * @param loc Nouvelle localisation.
-     */
+    /** @brief Modifie la localisation */
     void setLocalisation(const std::string& loc);
 
-    /**
-     * @brief Récupère le niveau de gravité.
-     * @return Le niveau de gravité.
-     */
+    /** @return Le niveau de gravité */
     int getNiveauGravite() const;
 
-    /**
-     * @brief Récupère le statut.
-     * @return Le statut sous forme de chaîne.
-     */
+    /** @return Le statut actuel */
     std::string getStatut() const;
 
-    /**
-     * @brief Définit le statut.
-     * @param st Nouveau statut.
-     */
+    /** @brief Modifie le statut */
     void setStatut(const std::string& st);
 
-    /**
-     * @brief Évalue la priorité de l’urgence.
-     * @return La priorité (basée sur le niveau de gravité).
-     */
+    /** @brief Calcule la priorité de l’urgence */
     virtual int evaluerPriorite() const = 0;
-    
-    /**
-     * @brief Met à jour le statut de l’urgence.
-     */
+
+    /** @brief Met à jour automatiquement le statut */
     void mettreAJourStatut();
+
+    /**
+     * @brief Retourne une représentation texte de l’urgence.
+     * @return Une chaîne de résumé
+     */
+    virtual std::string toString() const;
+
+    /**
+     * @brief Retourne une description plus détaillée (surchargeable)
+     * @return Chaîne descriptive
+     */
+    virtual std::string description() const;
+
+    /**
+     * @brief Définit la priorité
+     * @param p Niveau de priorité calculé
+     */
+    void setPriorite(int p);
+
+    /**
+     * @brief Affecte les ressources à l’urgence
+     * @param r Vecteur de ressources
+     */
+    void setRessources(const std::vector<Ressource>& r);
+    
+        /** @return La priorité */
+    int getPriorite() const;
+
+    /** @return Les ressources affectées */
+    std::vector<Ressource> getRessources() const;
+
+    /**
+     * @brief Méthode virtuelle pour générer une requête SQL d'insertion.
+     * @return Requête SQL au format chaîne.
+     */
+    virtual std::string genererRequeteSQL() const = 0;
+
 };
 
 #endif // URGENCE_HPP
+
