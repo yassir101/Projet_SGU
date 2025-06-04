@@ -43,10 +43,10 @@ Projet_SGU/
 
 ## ✍️ Développé par
 
-- A. Yassir  
-- C. T. Wedou  
-- D. Samuel  
-- G. Owen
+Yassir
+Wedou
+Owen
+Samuel
 
 ---
 
