@@ -70,6 +70,8 @@ public:
      * @return Chaîne de requête SQL
      */
     std::string genererRequeteSQL() const;
+    
+    bool estDisponible() const;
 };
 
 #endif // CENTRE_MEDICAL_HPP

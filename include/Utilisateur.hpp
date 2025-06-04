@@ -9,16 +9,27 @@
 #include <string>
 
 /**
+ * @enum EtatUtilisateur
+ * @brief Représente l'état de disponibilité d'un utilisateur.
+ */
+enum class EtatUtilisateur {
+    Libre,       ///< Utilisateur disponible pour intervention
+    Occupe,      ///< Utilisateur actuellement occupé
+    HorsService  ///< Utilisateur non disponible (hors service)
+};
+
+/**
  * @class Utilisateur
  * @brief Classe de base abstraite pour tous les utilisateurs du SGU.
  *
- * Cette classe fournit les attributs communs aux utilisateurs (id, nom).
+ * Cette classe fournit les attributs communs aux utilisateurs (id, nom, état).
  * Elle sert de superclasse pour les rôles spécifiques : Demandeur, Administrateur, Secouriste.
  */
 class Utilisateur {
 protected:
-    std::string id;   ///< Identifiant unique de l'utilisateur
-    std::string nom;  ///< Nom de l'utilisateur
+    std::string id;            ///< Identifiant unique de l'utilisateur
+    std::string nom;           ///< Nom de l'utilisateur
+    EtatUtilisateur etat;     ///< État courant de disponibilité
 
 public:
     /**
@@ -56,13 +67,31 @@ public:
      * @param nouveauNom Nom à affecter
      */
     void setNom(const std::string& nouveauNom);
-    
-    /**
- 	* @brief Renvoie le type de l'utilisateur (Demandeur, Secouriste, etc.)
- 	* @return Type textuel de l'utilisateur
- 	*/
-virtual std::string getTypeUtilisateur() const = 0;
 
+    /**
+     * @brief Obtient l'état de disponibilité de l'utilisateur
+     * @return État actuel
+     */
+    EtatUtilisateur getEtat() const;
+
+    /**
+     * @brief Modifie l'état de disponibilité de l'utilisateur
+     * @param nouveauEtat Nouvel état à affecter
+     */
+    void setEtat(EtatUtilisateur nouveauEtat);
+
+    /**
+     * @brief Indique si l'utilisateur est disponible pour intervention
+     * @return true si état Libre, false sinon
+     */
+    bool estDisponible() const;
+
+    /**
+     * @brief Renvoie le type de l'utilisateur (Demandeur, Secouriste, etc.)
+     * @return Type textuel de l'utilisateur
+     */
+    virtual std::string getTypeUtilisateur() const = 0;
 };
 
 #endif // UTILISATEUR_HPP
+

@@ -1,8 +1,3 @@
-/**
- * @file AllocateurRessources.hpp
- * @brief Gestionnaire intelligent des ressources d'urgence
- */
-
 #ifndef ALLOCATEUR_RESSOURCES_HPP
 #define ALLOCATEUR_RESSOURCES_HPP
 
@@ -15,6 +10,7 @@
 #include "QuestionnaireUrgence.hpp"
 #include "Ressource.hpp"
 #include "Demandeur.hpp"
+#include "Secouriste.hpp"
 
 /**
  * @class AllocateurRessources
@@ -22,6 +18,7 @@
  *
  * Cette classe applique une logique décisionnelle pour l’affectation optimale des ressources disponibles
  * à une intervention, en tenant compte des contraintes du questionnaire renseigné.
+ * Les ressources sont disponibles uniquement si elles ont au moins un secouriste disponible dans leur équipe.
  */
 class AllocateurRessources {
 private:
@@ -31,7 +28,7 @@ public:
     /// @brief Constructeur par défaut
     AllocateurRessources();
 
-    /// @name Gestion du pool
+    /// @name Gestion du pool de ressources
     /// @{
     /**
      * @brief Ajoute une ressource disponible au pool.
@@ -41,8 +38,8 @@ public:
 
     /**
      * @brief Vérifie la disponibilité d’un type de ressource.
-     * @param typeRessource Type recherché (ex: "Caserne", "Ambulance")
-     * @return true si une ressource est disponible
+     * @param typeRessource Type recherché (ex: "Caserne", "CentreMedical")
+     * @return true si une ressource de ce type a au moins un secouriste disponible
      */
     bool verifierDisponibilite(const std::string& typeRessource) const;
     /// @}
@@ -57,12 +54,23 @@ public:
     std::shared_ptr<Intervention> affecter(std::shared_ptr<Urgence> urgence);
 
     /**
-     * @brief Déclenche l'algorithme d’affectation (à améliorer).
+     * @brief Déclenche l'algorithme d’affectation (simulation actuelle).
+     * Retire un secouriste disponible de chaque ressource affectée.
      */
     void declencherAffectation();
     /// @}
 
-    /// @name Validation du formulaire
+    /// @name Gestion des secouristes dans les ressources
+    /// @{
+    /**
+     * @brief Libère un secouriste après intervention dans la ressource correspondante.
+     * @param idRessource Identifiant de la ressource
+     * @param secouriste Pointeur vers le secouriste à libérer
+     */
+    void libererSecouriste(const std::string& idRessource, std::shared_ptr<Secouriste> secouriste);
+    /// @}
+
+    /// @name Validation du formulaire d’urgence
     /// @{
     /**
      * @brief Vérifie si le questionnaire fourni est bien rempli.
@@ -70,7 +78,7 @@ public:
      * @return true si toutes les réponses sont valides
      */
     bool verifierCompletude(std::shared_ptr<QuestionnaireUrgence> questionnaire) const;
-
+    
     /**
      * @brief Demande des informations supplémentaires à l'utilisateur.
      * @param demandeur Utilisateur initial

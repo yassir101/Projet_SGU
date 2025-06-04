@@ -1,4 +1,5 @@
-#include "Administrateur.hpp"
+#include "../include/Administrateur.hpp"
+#include <iostream>
 
 Administrateur::Administrateur(const std::string& id, const std::string& nom, int niveauAcces)
     : Utilisateur(id, nom), niveauAcces(niveauAcces) {}
@@ -25,5 +26,13 @@ int Administrateur::getNiveauAcces() const {
 
 void Administrateur::setNiveauAcces(int niveau) {
     niveauAcces = niveau;
+}
+
+bool Administrateur::estDisponible() const {
+    return Utilisateur::estDisponible();
+}
+
+void Administrateur::setDisponible(bool dispo) {
+    setEtat(dispo ? EtatUtilisateur::Libre : EtatUtilisateur::HorsService);
 }
 

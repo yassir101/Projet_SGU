@@ -3,6 +3,7 @@
 
 #include <sqlite3.h>
 #include <string>
+#include <vector>
 #include <iostream>
 #include <memory>
 #include "Utilisateur.hpp"
@@ -65,6 +66,32 @@ public:
      * @brief Génère un rapport sous forme de fichier CSV
      */
     void exporterRapport(const Rapport& rapport);
+
+    /**
+     * @brief Récupère toutes les urgences de la base de données
+     * @return Un vecteur de chaînes représentant chaque urgence
+     */
+    std::vector<std::string> recupererUrgences() const;
+
+    /**
+     * @brief Récupère toutes les interventions selon un statut donné
+     * @param statut Le statut à filtrer (ex: "terminée", "en cours")
+     * @return Un vecteur de chaînes représentant chaque intervention correspondante
+     */
+    std::vector<std::string> recupererInterventionsParStatut(const std::string& statut) const;
+
+    /**
+     * @brief Met à jour le statut d'une intervention
+     * @param id L'identifiant de l'intervention
+     * @param nouveauStatut Le nouveau statut (ex: "terminée")
+     */
+    void mettreAJourStatutIntervention(const std::string& id, const std::string& nouveauStatut);
+
+    /**
+     * @brief Exécute une requête SQL SELECT et affiche les résultats (debug/admin)
+     * @param requeteSQL La requête à exécuter
+     */
+    void executerEtAfficher(const std::string& requeteSQL);
 };
 
 #endif // GESTIONNAIRE_BDD_HPP

@@ -50,7 +50,7 @@ public:
      * \brief Génère un rapport basé sur l’historique des interventions
      * \return Rapport synthétique
      */
-    Rapport genererRapport();
+    Rapport genererRapport() const;
 
     /*!
      * @brief Affiche l'historique des interventions

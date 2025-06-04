@@ -1,0 +1,6 @@
+A001;Clara;1
+A002;Marc;0
+A003;Sophie;1
+A004;Paul;0
+A005;Nadia;1
+

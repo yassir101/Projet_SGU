@@ -2,68 +2,46 @@
 #define RESSOURCE_HPP
 
 #include <string>
+#include <vector>
+#include <memory>
+#include <algorithm>
+#include "Secouriste.hpp"
 
-/**
- * @class Ressource
- * @brief Représente une ressource mobilisable dans le SGU.
- *
- * Classe de base pour toutes les ressources (caserne, secouriste, unité mobile…).
- * Gère l'identification, la disponibilité, et les opérations d'affectation.
- */
 class Ressource {
 protected:
-    std::string id;        ///< Identifiant spécifique de la ressource
-    bool disponible;       ///< État de disponibilité
-	std::string type;   /**< Type de la ressource */
+    std::string id;   ///< Identifiant unique
+    std::string type; ///< Type (ex: Caserne)
+    std::vector<std::shared_ptr<Secouriste>> equipeSecouristes; ///< Équipe associée
 
 public:
-    /**
-     * @brief Constructeur.
-     * @param idRessource Identifiant spécifique de la ressource.
-     * @param type Type de la ressource
-     */
     Ressource(const std::string& idRessource, const std::string& type);
-
-    /**
-     * @brief Destructeur virtuel.
-     */
     virtual ~Ressource() = default;
-
-    /**
-     * @brief Récupère l’identifiant spécifique de la ressource.
-     * @return L’identifiant de la ressource.
-     */
+	
     std::string getIdRessource() const;
-
-    /**
-     * @brief Vérifie la disponibilité.
-     * @return True si disponible, false sinon.
-     */
-    bool estDisponible() const;
-    
-    /** @brief Retourne le type de la ressource */
     virtual std::string getType() const;
 
     /**
-     * @brief Affecte la ressource à une intervention.
+     * @brief Indique si la ressource est disponible
+     *        (au moins un secouriste disponible dans l’équipe).
+     */
+    virtual bool estDisponible() const;
+
+    /**
+     * @brief Affecte un secouriste libre (change son état à occupé).
      */
     virtual void affecter();
 
     /**
-     * @brief Libère la ressource après usage.
+     * @brief Libère un secouriste (change son état à libre).
      */
     virtual void liberer();
+   
 
-    /**
-     * @brief Retourne une description textuelle de la ressource.
-     * @return Chaîne résumant l’état et l’identifiant.
-     */
+    void ajouterSecouriste(std::shared_ptr<Secouriste> sec);
+    void retirerSecouriste(const std::string& idSecouriste);
+    const std::vector<std::shared_ptr<Secouriste>>& getEquipeSecouristes() const;
+
     virtual std::string toString() const;
-
-    /**
-     * @brief Génère une commande SQL d’insertion dans la base.
-     * @return Requête SQL formatée.
-     */
     virtual std::string genererRequeteSQL() const;
 };
 

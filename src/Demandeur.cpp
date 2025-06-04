@@ -1,4 +1,4 @@
-#include "Demandeur.hpp"
+#include "../include/Demandeur.hpp"
 #include <iostream>
 
 Demandeur::Demandeur(const std::string& id, const std::string& nom, const std::string& tel)
@@ -20,7 +20,16 @@ std::string Demandeur::getTelephone() const {
 void Demandeur::setTelephone(const std::string& tel) {
     telephone = tel;
 }
+
 std::string Demandeur::getTypeUtilisateur() const {
     return "Demandeur";
+}
+
+bool Demandeur::estDisponible() const {
+    return Utilisateur::estDisponible();
+}
+
+void Demandeur::setDisponible(bool dispo) {
+    setEtat(dispo ? EtatUtilisateur::Libre : EtatUtilisateur::HorsService);
 }
 

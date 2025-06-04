@@ -1,0 +1,9 @@
+C001;Caserne;Disponible
+C002;Caserne;Disponible
+UP001;UnitePolice;Disponible
+UP002;UnitePolice;Disponible
+CM001;CentreMedical;Disponible
+CM002;CentreMedical;Disponible
+AMB001;Ambulance;Disponible
+AMB002;Ambulance;Disponible
+
