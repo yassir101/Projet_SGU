@@ -86,9 +86,15 @@ public:
     /// @{
     std::string getId() const;
     std::string getStatut() const;
+    std::string getDebut() const;
+    std::string getFin() const;
+    std::string getRaisonAnnulation() const;
     std::shared_ptr<Urgence> getUrgence() const;
     std::shared_ptr<SuiviIntervention> getSuivi() const;
+
     /// @}
+    std::string toString() const;
+    std::string genererRequeteSQL() const;
 };
 
 #endif // INTERVENTION_HPP

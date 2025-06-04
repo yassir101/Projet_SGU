@@ -1,29 +1,40 @@
 #include "Archivage.hpp"
+#include <iostream>
 
-// Archive une intervention terminée
-void Archivage::archiver(const Intervention& interv) {
-    // à implémenter
+void Archivage::archiver(const std::shared_ptr<Intervention>& interv) {
+    historiques.push_back(interv);
 }
 
-// Recherche des interventions selon des filtres
-std::vector<Intervention> Archivage::rechercher(const std::map<std::string, std::string>& filtres) {
-    // à implémenter
-    return {};
+std::vector<std::shared_ptr<Intervention>> Archivage::rechercher(const std::map<std::string, std::string>& filtres) {
+    std::vector<std::shared_ptr<Intervention>> resultats;
+    for (const auto& interv : historiques) {
+        // Exemple : recherche par statut
+        if (filtres.count("statut") && interv->getStatut() != filtres.at("statut")) continue;
+        resultats.push_back(interv);
+    }
+    return resultats;
 }
 
-// Génère les statistiques sur les interventions archivées
 Statistiques Archivage::genererStatistiques() {
-    // à implémenter
-    return Statistiques();
+    Statistiques stats;
+    // À implémenter plus tard avec compteur par type ou gravité
+    return stats;
 }
 
-// Génère un rapport basé sur l’historique
 Rapport Archivage::genererRapport() {
-    // à implémenter
-    return Rapport();
+    Rapport rapport;
+    // À compléter : exporter les urgences, nb, durée...
+    return rapport;
 }
 
-const std::vector<Intervention>& Archivage::getHistoriques() const {
+void Archivage::afficherHistorique() const {
+    std::cout << "=== Historique des interventions ===" << std::endl;
+    for (const auto& i : historiques) {
+        std::cout << i->toString() << std::endl;
+    }
+}
+
+const std::vector<std::shared_ptr<Intervention>>& Archivage::getHistoriques() const {
     return historiques;
 }
 

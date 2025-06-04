@@ -1,32 +1,49 @@
 #include "../include/GestionnaireUrgence.hpp"
-
-// Constructeur par défaut du gestionnaire
+#include <iostream>
+#include <algorithm>
 GestionnaireUrgence::GestionnaireUrgence()
     : journal(std::make_shared<JournalSysteme>()),
       allocateur(std::make_shared<AllocateurRessources>()) {}
 
-// Analyse les informations reçues sur une urgence
-void GestionnaireUrgence::analyserUrgence() {
-    // à implémenter
+// Analyse une urgence
+void GestionnaireUrgence::analyserUrgence(const std::shared_ptr<Urgence>& urgence) {
+    journal->enregistrerEvenement("Analyse de l'urgence : " + urgence->toString());
 }
 
-// Enregistre une nouvelle urgence dans le système
-void GestionnaireUrgence::enregistrerUrgence() {
-    // à implémenter
+// Enregistre une urgence
+void GestionnaireUrgence::enregistrerUrgence(const std::shared_ptr<Urgence>& urgence) {
+    urgences.push_back(urgence);
+    journal->enregistrerEvenement("Enregistrement de l'urgence : " + urgence->toString());
 }
 
-// Classe les urgences selon leur priorité
+// Calcule la priorité d'une urgence
+int GestionnaireUrgence::calculerPriorite(const std::shared_ptr<Urgence>& urgence) const {
+    return urgence->evaluerPriorite();
+}
+
+// Trie les urgences par priorité décroissante
 void GestionnaireUrgence::prioriser() {
-    // à implémenter
+    std::sort(urgences.begin(), urgences.end(),
+              [](const std::shared_ptr<Urgence>& a, const std::shared_ptr<Urgence>& b) {
+                  return a->getPriorite() > b->getPriorite();
+              });
+    journal->enregistrerEvenement("Tri des urgences selon leur priorité effectué.");
 }
 
-// Envoie des notifications aux acteurs concernés
-void GestionnaireUrgence::notifier() {
-    // à implémenter
+// Notifie le demandeur
+void GestionnaireUrgence::notifier(const std::shared_ptr<Urgence>& urgence) {
+    Notification notification("Une urgence de type " + urgence->getTypeUrgence() +
+                              " a été détectée à " + urgence->getLocalisation() +
+                              ". Gravité : " + std::to_string(urgence->getNiveauGravite()));
+    
+    // Exemple d'envoi générique (sans destinataire réel)
+    std::cout << "[NOTIFICATION] → Message : " << notification.getMessage() << std::endl;
+
+    journal->enregistrerEvenement("Notification envoyée pour l'urgence : " + urgence->getIdUrgence());
 }
 
-// Synchronise les données avec d’autres systèmes
+// Synchronisation (placeholder)
 void GestionnaireUrgence::synchroniserDonneesExternes() {
-    // à implémenter
+    journal->enregistrerEvenement("Synchronisation avec les systèmes externes.");
 }
 

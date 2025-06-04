@@ -24,21 +24,21 @@
  */
 class Archivage {
 private:
-    std::vector<Intervention> historiques; /*!< Liste des interventions archivées */
-    
+    std::vector<std::shared_ptr<Intervention>> historiques; /*!< Liste des interventions archivées */
+
 public:
     /*!
      * \brief Archive une intervention
      * \param interv L’intervention à archiver
      */
-    void archiver(const Intervention& interv);
+    void archiver(const std::shared_ptr<Intervention>& interv);
 
     /*!
      * \brief Recherche des interventions selon des filtres
      * \param filtres Critères de recherche
      * \return Liste d’interventions correspondant aux filtres
      */
-    std::vector<Intervention> rechercher(const std::map<std::string, std::string>& filtres);
+    std::vector<std::shared_ptr<Intervention>> rechercher(const std::map<std::string, std::string>& filtres);
 
     /*!
      * \brief Génère les statistiques à partir des interventions archivées
@@ -51,10 +51,14 @@ public:
      * \return Rapport synthétique
      */
     Rapport genererRapport();
-    
-    /// @brief Accède à la liste des interventions archivées (lecture seule)
-    const std::vector<Intervention>& getHistoriques() const;
 
+    /*!
+     * @brief Affiche l'historique des interventions
+     */
+    void afficherHistorique() const;
+
+    /// @brief Accède à la liste des interventions archivées (lecture seule)
+    const std::vector<std::shared_ptr<Intervention>>& getHistoriques() const;
 };
 
 #endif // ARCHIVAGE_HPP

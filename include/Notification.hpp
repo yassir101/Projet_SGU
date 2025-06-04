@@ -9,43 +9,45 @@
 #include <string>
 #include "Utilisateur.hpp"
 
-/*!
- * \class Notification
- * \brief Représente une notification à envoyer à un utilisateur
+/**
+ * @class Notification
+ * @brief Représente une notification à envoyer à un utilisateur
  *
- * Cette classe encapsule un message à transmettre à un utilisateur.
+ * Cette classe encapsule un message texte et fournit une méthode
+ * pour notifier un utilisateur. Elle pourra être étendue pour intégrer
+ * des canaux multiples (SMS, email, etc.) ou une journalisation.
  */
 class Notification {
 private:
-    std::string message; /*!< Contenu du message */
+    std::string message; ///< Contenu textuel de la notification
 
 public:
-    /*!
-     * \brief Constructeur par défaut
+    /**
+     * @brief Constructeur par défaut
      */
     Notification();
 
-    /*!
-     * \brief Constructeur avec message initial
-     * \param msg Contenu à initialiser
+    /**
+     * @brief Constructeur avec initialisation
+     * @param msg Contenu initial du message
      */
     Notification(const std::string& msg);
 
-    /*!
-     * \brief Envoie une notification à un utilisateur
-     * \param dest Utilisateur destinataire
+    /**
+     * @brief Envoie la notification à un utilisateur donné
+     * @param dest Référence vers l’utilisateur destinataire
      */
     void envoyer(Utilisateur& dest);
 
-    /*!
-     * \brief Récupère le message
-     * \return Le message de la notification
+    /**
+     * @brief Accesseur du message
+     * @return Le message contenu dans la notification
      */
     std::string getMessage() const;
 
-    /*!
-     * \brief Modifie le message
-     * \param nouveau Nouveau contenu du message
+    /**
+     * @brief Mutateur du message
+     * @param nouveau Nouveau contenu à affecter
      */
     void setMessage(const std::string& nouveau);
 };

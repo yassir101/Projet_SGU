@@ -1,4 +1,4 @@
-#include "Secouriste.hpp"
+#include "../include/Secouriste.hpp"
 
 Secouriste::Secouriste(const std::string& id, const std::string& nom,
                        const std::string& matricule, const std::string& specialite)
@@ -31,3 +31,17 @@ std::string Secouriste::getSpecialite() const {
 void Secouriste::setSpecialite(const std::string& s) {
     specialite = s;
 }
+
+std::string Secouriste::getTypeUtilisateur() const {
+    return "Secouriste";
+}
+
+std::string Secouriste::toString() const {
+    return "[Secouriste] Nom=" + nom + ", Matricule=" + matricule + ", Spécialité=" + specialite;
+}
+
+std::string Secouriste::genererRequeteSQL() const {
+    return "INSERT INTO secouristes (id, nom, matricule, specialite) VALUES ('"
+        + id + "', '" + nom + "', '" + matricule + "', '" + specialite + "');";
+}
+

@@ -6,81 +6,85 @@
 #ifndef ALLOCATEUR_RESSOURCES_HPP
 #define ALLOCATEUR_RESSOURCES_HPP
 
+#include <vector>
+#include <memory>
+#include <string>
+
 #include "Intervention.hpp"
 #include "Urgence.hpp"
 #include "QuestionnaireUrgence.hpp"
 #include "Ressource.hpp"
 #include "Demandeur.hpp"
-#include <vector>
-#include <memory>
 
 /**
  * @class AllocateurRessources
- * @brief Orchestrateur de l'allocation des ressources
- * 
- * Implémente le pattern Stratégie pour l'affectation optimale des ressources
- * selon le type et la gravité de l'urgence.
+ * @brief Orchestrateur de l'allocation des ressources du SGU.
+ *
+ * Cette classe applique une logique décisionnelle pour l’affectation optimale des ressources disponibles
+ * à une intervention, en tenant compte des contraintes du questionnaire renseigné.
  */
 class AllocateurRessources {
 private:
     std::vector<std::shared_ptr<Ressource>> ressources; ///< Pool de ressources disponibles
 
 public:
+    /// @brief Constructeur par défaut
     AllocateurRessources();
-    
-    /// @name Gestion du pool de ressources
+
+    /// @name Gestion du pool
     /// @{
     /**
-     * @brief Ajoute une ressource au pool
+     * @brief Ajoute une ressource disponible au pool.
      * @param ressource Ressource à ajouter
      */
     void ajouterRessource(std::shared_ptr<Ressource> ressource);
-    
+
     /**
-     * @brief Vérifie la disponibilité par type
-     * @param typeRessource Type de ressource recherchée
-     * @return true si au moins une ressource est disponible
+     * @brief Vérifie la disponibilité d’un type de ressource.
+     * @param typeRessource Type recherché (ex: "Caserne", "Ambulance")
+     * @return true si une ressource est disponible
      */
     bool verifierDisponibilite(const std::string& typeRessource) const;
     /// @}
-    
-    /// @name Méthodes d'allocation
+
+    /// @name Allocation des ressources
     /// @{
     /**
-     * @brief Affecte des ressources à une urgence
-     * @param urgence Urgence à traiter
-     * @return Intervention créée ou nullptr
+     * @brief Affecte des ressources pertinentes à une urgence.
+     * @param urgence Urgence signalée
+     * @return Pointeur vers l'intervention créée
      */
     std::shared_ptr<Intervention> affecter(std::shared_ptr<Urgence> urgence);
-    
+
     /**
-     * @brief Lance le processus d'affectation
+     * @brief Déclenche l'algorithme d’affectation (à améliorer).
      */
     void declencherAffectation();
     /// @}
-    
-    /// @name Validation
+
+    /// @name Validation du formulaire
     /// @{
     /**
-     * @brief Vérifie la complétude d'un questionnaire
-     * @param questionnaire Questionnaire à valider
-     * @return true si le questionnaire est complet
+     * @brief Vérifie si le questionnaire fourni est bien rempli.
+     * @param questionnaire Questionnaire renseigné
+     * @return true si toutes les réponses sont valides
      */
     bool verifierCompletude(std::shared_ptr<QuestionnaireUrgence> questionnaire) const;
-    
+
     /**
-     * @brief Demande des informations complémentaires
-     * @param demandeur Demandeur à contacter
+     * @brief Demande des informations supplémentaires à l'utilisateur.
+     * @param demandeur Utilisateur initial
      */
     void demanderInfos(std::shared_ptr<Demandeur> demandeur);
     /// @}
-    
+
     /**
-     * @brief Crée une nouvelle intervention
-     * @param urgence Urgence à traiter
-     * @return Nouvelle intervention configurée
+     * @brief Génère une nouvelle intervention pour une urgence.
+     * @param urgence Urgence à gérer
+     * @return Nouvelle intervention créée
      */
     std::shared_ptr<Intervention> creerIntervention(std::shared_ptr<Urgence> urgence);
 };
 
 #endif // ALLOCATEUR_RESSOURCES_HPP
+

@@ -20,3 +20,7 @@ std::string Demandeur::getTelephone() const {
 void Demandeur::setTelephone(const std::string& tel) {
     telephone = tel;
 }
+std::string Demandeur::getTypeUtilisateur() const {
+    return "Demandeur";
+}
+

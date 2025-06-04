@@ -7,6 +7,9 @@
 #define INTERFACEUTILISATEUR_HPP
 
 #include <iostream>
+#include <string>
+#include <memory>
+#include "Urgence.hpp"
 
 /**
  * @class InterfaceUtilisateur
@@ -21,8 +24,16 @@ public:
 
     /**
      * @brief Affiche un message de statut générique.
+     * @param statut Texte à afficher à l'utilisateur.
      */
-    void afficherStatut() const;
+    void afficherStatut(const std::string& statut) const;
+
+    /**
+     * @brief Collecte les informations d'une urgence auprès de l'utilisateur.
+     * @return Un pointeur vers une instance de sous-classe de Urgence.
+     */
+    std::unique_ptr<Urgence> collecterUrgence() const;
 };
 
 #endif // INTERFACEUTILISATEUR_HPP
+

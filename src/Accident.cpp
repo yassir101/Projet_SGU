@@ -17,3 +17,17 @@ int Accident::evaluerPriorite() const {
     return niveauGravite;
 }
 
+int Accident::getNbVehicules() const {
+    return nbVehicules;
+}
+
+void Accident::setNbVehicules(int nbVeh) {
+    nbVehicules = nbVeh;
+}
+
+std::string Accident::genererRequeteSQL() const {
+    return "INSERT INTO urgences (id, type, localisation, gravite, statut, priorite, nbVehicules) VALUES ('" 
+        + id + "', '" + type + "', '" + localisation + "', " + std::to_string(niveauGravite) + ", '" 
+        + statut + "', " + std::to_string(priorite) + ", " + std::to_string(nbVehicules) + ");";
+}
+

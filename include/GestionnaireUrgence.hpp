@@ -3,10 +3,11 @@
 
 /*!
  * \file GestionnaireUrgence.hpp
- * \brief Déclaration de la classe GestionnaireUrgence
+ * \brief Contrôleur de traitement des urgences dans le SGU
  */
 
 #include <memory>
+#include <vector>
 #include "Urgence.hpp"
 #include "Intervention.hpp"
 #include "QuestionnaireUrgence.hpp"
@@ -25,6 +26,11 @@
  * avec des systèmes externes.
  */
 class GestionnaireUrgence {
+private:
+    std::shared_ptr<JournalSysteme> journal;
+    std::shared_ptr<AllocateurRessources> allocateur;
+    std::vector<std::shared_ptr<Urgence>> urgences;
+    
 public:
     /*!
      * \brief Constructeur par défaut
@@ -33,41 +39,38 @@ public:
 
     /*!
      * \brief Analyse les données d’une urgence signalée
-     *
-     * Cette méthode traite les informations d'une urgence reçue
-     * et prépare sa gestion.
+     * \param urgence Objet urgence à analyser
      */
-    void analyserUrgence();
+    void analyserUrgence(const std::shared_ptr<Urgence>& urgence);
 
     /*!
      * \brief Enregistre une nouvelle urgence dans le système
-     *
-     * Permet de stocker l’urgence et de déclencher le traitement.
+     * \param urgence Objet urgence à stocker
      */
-    void enregistrerUrgence();
+    void enregistrerUrgence(const std::shared_ptr<Urgence>& urgence);
+
+    /*!
+     * \brief Calcule la priorité d'une urgence
+     * \param urgence L'urgence à évaluer
+     * \return Valeur de priorité
+     */
+    int calculerPriorite(const std::shared_ptr<Urgence>& urgence) const;
 
     /*!
      * \brief Classe les urgences par ordre de priorité
-     *
-     * L’ordre de traitement est déterminé selon le niveau de gravité,
-     * la localisation, ou d'autres critères pertinents.
      */
     void prioriser();
 
     /*!
      * \brief Notifie les services ou utilisateurs concernés
-     *
-     * Utilise le système de Notification pour alerter les acteurs impliqués.
+     * \param urgence L'urgence pour laquelle notifier
      */
-    void notifier();
+    void notifier(const std::shared_ptr<Urgence>& urgence);
 
     /*!
      * \brief Synchronise les données avec les systèmes externes
-     *
-     * Peut être utilisé pour des mises à jour intermodules ou externes.
      */
     void synchroniserDonneesExternes();
-
 };
 
 #endif // GESTIONNAIRE_URGENCE_HPP

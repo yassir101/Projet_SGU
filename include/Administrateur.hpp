@@ -44,9 +44,18 @@ public:
      */
     void demanderRapport() const;
 
-    // Getter / Setter
+    /**
+     * @brief Retourne le type d'utilisateur (ici "Administrateur")
+     * @return "Administrateur"
+     */
+    std::string getTypeUtilisateur() const override;
+
+    /// @name Accesseurs
+    /// @{
     int getNiveauAcces() const;
     void setNiveauAcces(int niveau);
+    /// @}
 };
 
 #endif // ADMINISTRATEUR_HPP
+

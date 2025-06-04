@@ -15,6 +15,10 @@ void Administrateur::demanderRapport() const {
     std::cout << "[Administrateur] " << nom << " demande la génération d’un nouveau rapport." << std::endl;
 }
 
+std::string Administrateur::getTypeUtilisateur() const {
+    return "Administrateur";
+}
+
 int Administrateur::getNiveauAcces() const {
     return niveauAcces;
 }
@@ -22,3 +26,4 @@ int Administrateur::getNiveauAcces() const {
 void Administrateur::setNiveauAcces(int niveau) {
     niveauAcces = niveau;
 }
+

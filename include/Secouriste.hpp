@@ -1,8 +1,3 @@
-/**
- * @file Secouriste.hpp
- * @brief Représente un secouriste dans le système SGU.
- */
-
 #ifndef SECOURISTE_HPP
 #define SECOURISTE_HPP
 
@@ -13,6 +8,9 @@
 /**
  * @class Secouriste
  * @brief Utilisateur intervenant sur le terrain pour gérer les urgences.
+ *
+ * Le secouriste hérite de la classe Utilisateur et ajoute des attributs
+ * spécifiques comme le matricule et la spécialité.
  */
 class Secouriste : public Utilisateur {
 private:
@@ -45,12 +43,34 @@ public:
      */
     void transmettrePosition() const;
 
-    // Getters / Setters
+    /**
+     * @brief Affiche une description textuelle du secouriste.
+     * @return Description au format lisible.
+     */
+    std::string toString() const;
+
+    /**
+     * @brief Génère une commande SQL d’insertion du secouriste.
+     * @return Requête SQL formatée.
+     */
+    std::string genererRequeteSQL() const;
+    
+    /**
+ 	* @brief Retourne le type d'utilisateur (ici "Secouriste")
+ 	* @return "Secouriste"
+ 	*/
+	std::string getTypeUtilisateur() const override;
+
+
+    /// @name Accesseurs
+    /// @{
     std::string getMatricule() const;
     void setMatricule(const std::string& m);
 
     std::string getSpecialite() const;
     void setSpecialite(const std::string& s);
+    /// @}
 };
 
 #endif // SECOURISTE_HPP
+

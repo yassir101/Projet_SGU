@@ -1,23 +1,49 @@
 #include "../include/Statistiques.hpp"
 #include <iostream>
+#include <numeric>
+#include <sstream>
 
-// Constructeur par défaut
-Statistiques::Statistiques() : total(0) {}
+Statistiques::Statistiques()
+    : total(0), graviteMoyenne(0.0) {}
 
-// Lance le calcul des statistiques
-void Statistiques::calculer() {
-    // Simulation d'un traitement : ici on incrémente simplement pour illustrer
-    std::cout << "[Statistiques] Calcul des interventions archivées...\n";
-    total += 5; // Simule l'ajout de 5 nouvelles interventions archivées
-    std::cout << "[Statistiques] Total mis à jour : " << total << std::endl;
+void Statistiques::calculer(const std::vector<Intervention>& historique) {
+    total = historique.size();
+    parType.clear();
+    parStatut.clear();
+    double sommeGravite = 0;
+
+    for (const auto& interv : historique) {
+        if (auto urgence = interv.getUrgence()) {
+            parType[urgence->getTypeUrgence()]++;
+            sommeGravite += urgence->getNiveauGravite();
+        }
+
+        parStatut[interv.getStatut()]++;
+    }
+
+    graviteMoyenne = (total > 0) ? sommeGravite / total : 0.0;
+
+    std::cout << "[Statistiques] Calcul terminé — " << total << " interventions." << std::endl;
 }
 
-// Getter du total
-int Statistiques::getTotal() const {
-    return total;
+std::string Statistiques::toString() const {
+    std::ostringstream oss;
+    oss << "=== Statistiques SGU ===\n";
+    oss << "Total interventions : " << total << "\n";
+    oss << "Gravité moyenne     : " << graviteMoyenne << "\n";
+    oss << "\nPar type :\n";
+    for (const auto& [type, count] : parType)
+        oss << " - " << type << " : " << count << "\n";
+    oss << "\nPar statut :\n";
+    for (const auto& [statut, count] : parStatut)
+        oss << " - " << statut << " : " << count << "\n";
+
+    return oss.str();
 }
 
-// Setter du total
-void Statistiques::setTotal(int nouveauTotal) {
-    total = nouveauTotal;
-}
+// Getters
+int Statistiques::getTotal() const { return total; }
+double Statistiques::getGraviteMoyenne() const { return graviteMoyenne; }
+std::map<std::string, int> Statistiques::getParType() const { return parType; }
+std::map<std::string, int> Statistiques::getParStatut() const { return parStatut; }
+
